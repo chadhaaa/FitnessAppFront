@@ -19,9 +19,13 @@
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-picker-select": "^8.0.4",
+    "react-native-ratings": "^8.1.0",
     "react-native-stars": "^1.2.2",
     "react-native-switch": "^1.5.1",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "react-native-web": "~0.18.9",
+    "react-dom": "18.1.0",
+    "@expo/webpack-config": "^0.17.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
