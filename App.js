@@ -1,10 +1,7 @@
 import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import Home from "./screens/home/Home";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
-// const Stack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
