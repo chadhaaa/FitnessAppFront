@@ -1,12 +1,30 @@
-import { View, Text} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-
+import { Card, Button, Title, Paragraph } from "react-native-paper";
+import musculation from "../../assets/musculation.png";
 const Home = () => {
   return (
-    <View>
-      <Text> Dashboard : Team 9</Text>
-    </View>
+    <Card style={Styles.container}>
+      <Card.Content>
+        <Title>FitnessApp By Team 9</Title>
+      </Card.Content>
+      <Card.Cover
+        source={{
+          musculation,
+        }}
+      />
+      <Card.Content>
+        <Paragraph>Explore the App ! </Paragraph>
+      </Card.Content>
+    </Card>
   );
 };
 
 export default Home;
+
+const Styles = StyleSheet.create({
+  container: {
+    alignContent: "center",
+    margin: 37,
+  },
+});
