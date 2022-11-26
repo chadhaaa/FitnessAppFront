@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import CrudStatistics from "./screens/crudStatistics/CrudStatistics";
 import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
+import CrudDefis from "./screens/crudDefis/crudDefis";
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
 const Drawer = createDrawerNavigator();
 
@@ -15,6 +16,7 @@ const App = () => {
 
         <Drawer.Screen name="Competences" component={CrudCompetences} />
         <Drawer.Screen name="Invite Player" component={InvitePlayer} />
+        <Drawer.Screen name="Challenges" component={CrudDefis} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
