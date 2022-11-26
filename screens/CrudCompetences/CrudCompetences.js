@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Rating, AirbnbRating } from "react-native-ratings";
+import { Rating } from "react-native-ratings";
 
 const CrudCompetences = () => {
   const [comp, setComp] = useState([]);
@@ -178,6 +178,7 @@ const CrudCompetences = () => {
               imageSize={30}
               onFinishRating={onChangeStars}
               style={{ paddingVertical: 10 }}
+              startingValue={stars}
             />
             <Text style={styles.text}>
               Do you want to make it visible to the player ?
@@ -295,5 +296,10 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "green",
     textAlign: "center",
+  },
+  txtClose: {
+    marginTop: 10,
+    fontSize: 22,
+    color: "red",
   },
 });
