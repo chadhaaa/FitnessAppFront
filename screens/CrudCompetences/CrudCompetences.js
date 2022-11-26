@@ -206,11 +206,11 @@ const CrudCompetences = () => {
           return (
             <View style={styles.item_course} key={index}>
               <View>
-                <Text style={styles.txt_name}>{item.name}</Text>
+                <Text style={styles.txt_name}> {item.name}</Text>
 
-                <Text style={styles.txt_item}>{item?.description}</Text>
+                <Text style={styles.txt_item}> {item?.description}</Text>
 
-                <Text style={styles.txt_item}>{item.link}</Text>
+                <Text style={styles.txt_item}> {item.link}</Text>
                 <Text style={styles.txt_item}>
                   <Rating
                     startingValue={item?.stars}
@@ -254,7 +254,6 @@ const styles = StyleSheet.create({
   item_course: {
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: "#e2e2e2",
     flexDirection: "row",
     justifyContent: "space-between",
   },
