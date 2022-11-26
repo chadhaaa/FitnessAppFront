@@ -1,22 +1,18 @@
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
-import Home from "./screens/Home/Home";
+import Home from "./screens/home/Home";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: "Welcome To Dashboard !" }}
-        />
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={Home} />
 
-        <Stack.Screen name="InvitePlayer" component={InvitePlayer} />
-      </Stack.Navigator>
+        <Drawer.Screen name="Invite Player" component={InvitePlayer} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };

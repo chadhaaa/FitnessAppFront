@@ -2,7 +2,7 @@ import { TextInput, Button, DevSettings, View } from "react-native";
 import React, { useState } from "react";
 import axios from "axios";
 
-const InvitePlayer = () => {
+const InvitePlayer = ({ navigation }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ const InvitePlayer = () => {
       .then((res) => {
         const response = res.data;
       });
-    // DevSettings.reload();
+    navigation.navigate("Home");
   };
 
   return (
