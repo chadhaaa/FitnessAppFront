@@ -1,10 +1,8 @@
-import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import Home from "./screens/home/Home";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
-// const Stack = createNativeStackNavigator();
+import CrudStatistics from "./screens/crudStatistics/CrudStatistics";
+import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 
 const Drawer = createDrawerNavigator();
 
@@ -13,6 +11,7 @@ const App = () => {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Statistics" component={CrudStatistics} />
 
         <Drawer.Screen name="Competences" component={CrudCompetences} />
       </Drawer.Navigator>
