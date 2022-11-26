@@ -1,14 +1,10 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 
-const Home = ({ navigation }) => {
+const Home = () => {
   return (
     <View>
-      <Text> This is where all you stuff goes !</Text>
-      <Button
-        title="Competences"
-        onPress={() => navigation.navigate("Competences")}
-      />
+      <Text> DASHBOARD : TEAM 9 </Text>
     </View>
   );
 };

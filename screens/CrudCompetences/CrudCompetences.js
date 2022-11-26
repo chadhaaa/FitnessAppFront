@@ -138,7 +138,6 @@ const CrudCompetences = () => {
   return (
     <SafeAreaView>
       <View style={styles.header_container}>
-        <Text style={styles.txt_main}> Competences</Text>
         <TouchableOpacity
           onPress={handleVisibleModal}
           style={styles.btnNewContainer}
@@ -161,14 +160,14 @@ const CrudCompetences = () => {
             <TextInput
               value={description}
               style={styles.text_input}
-              placeholder="Statistic Description"
+              placeholder="Competence Description"
               onChangeText={onChangeDescription}
             />
 
             <TextInput
               value={link}
               style={styles.text_input}
-              placeholder="Statistic Link"
+              placeholder="Competence Link"
               onChangeText={onChangeLink}
             />
             <Rating
@@ -211,7 +210,17 @@ const CrudCompetences = () => {
                 <Text style={styles.txt_item}>{item?.description}</Text>
 
                 <Text style={styles.txt_item}>{item.link}</Text>
-                <Text style={styles.txt_item}>{String(item?.stars)}</Text>
+                <Text style={styles.txt_item}>
+                  <Rating
+                    startingValue={item?.stars}
+                    type="custom"
+                    ratingColor="yellow"
+                    ratingBackgroundColor="grey"
+                    imageSize={30}
+                    readonly={true}
+                    style={{ paddingVertical: 10 }}
+                  />
+                </Text>
                 <Text style={styles.txt_item}>{String(item?.visibility)}</Text>
               </View>
               <View>
@@ -280,5 +289,11 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderRadius: 10,
     marginTop: 10,
+  },
+  textButton: {
+    marginTop: 10,
+    fontSize: 22,
+    color: "green",
+    textAlign: "center",
   },
 });
