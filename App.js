@@ -1,10 +1,8 @@
-
 import Home from "./screens/home/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import CrudStatistics from "./screens/crudStatistics/CrudStatistics";
 import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Drawer = createDrawerNavigator();
 
@@ -16,7 +14,6 @@ const App = () => {
         <Drawer.Screen name="Statistics" component={CrudStatistics} />
 
         <Drawer.Screen name="Competences" component={CrudCompetences} />
-
       </Drawer.Navigator>
     </NavigationContainer>
   );
