@@ -12,27 +12,28 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CrudDefis = () => {
-  const [defi, setDefi] = useState([]);
+const CrudPrograms = () => {
+  const [program, setProgram] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [goal, setGoal] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
-  const [done, setDone] = useState(false);
+  const [picture, setPicture] = useState("");
   const [hideId, setHideId] = useState(null);
 
   useEffect(() => {
-    getDefis();
+    getPrograms();
   }, []);
-  const getDefis = async () => {
+  const getPrograms = async () => {
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.197:8000/api/challenges", { headers })
+      .get("http://192.168.1.197:8000/api/programs", { headers })
       .then((res) => {
         console.log(res);
-        setDefi(res.data);
+        setProgram(res.data);
         console.log(res.data);
       })
       .catch((error) => console.log(error));
@@ -43,12 +44,12 @@ const CrudDefis = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.197:8000/api/challenge/" + item._id, {
+      .delete("http://192.168.1.197:8000/api/program/" + item._id, {
         headers,
       })
       .then((res) => {
         var respo = res.data;
-        getDefis();
+        getPrograms();
       })
       .catch((error) => console.log(error));
   };
@@ -56,35 +57,38 @@ const CrudDefis = () => {
   const handleSave = () => {
     if (hideId == null) {
       const formdata = {
-        goal: goal,
+        title: title,
+        description: description,
         link: link,
-        done: done,
+        picture: picture,
       };
       axios
-        .post("http://192.168.1.197:8000/api/challenge", formdata)
+        .post("http://192.168.1.197:8000/api/program", formdata)
         .then((res) => {
           const response = res.data;
-          getDefis();
-          setGoal("");
+          getPrograms();
+          setTitle("");
+          setDescription("");
           setLink("");
-          setDone(false);
-          setVisible(false);
+          setPicture("");
         });
     } else {
       const formdata = {
         _id: hideId,
-        goal: goal,
+        title: title,
+        description: description,
         link: link,
-        done: done,
+        picture: picture,
       };
       axios
-        .put("http://192.168.1.197:8000/api/challenge/" + hideId, formdata)
+        .put("http://192.168.1.197:8000/api/program/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
-          getDefis();
-          setGoal("");
+          getPrograms();
+          setTitle("");
+          setDescription("");
           setLink("");
-          setDone(false);
+          setPicture("");
           setVisible(false);
         });
     }
@@ -92,9 +96,10 @@ const CrudDefis = () => {
   const handleEdit = (item) => {
     setVisible(true);
     setHideId(item._id);
-    setGoal(item.goal);
+    setTitle(item.title);
+    setDescription(item.description);
     setLink(item.link);
-    setDone(item.done);
+    setPicture(item.picture);
   };
 
   const handleVisibleModal = () => {
@@ -102,16 +107,20 @@ const CrudDefis = () => {
     setHideId(null);
   };
 
-  const onChangeGoal = (value) => {
-    setGoal(value);
+  const onChangeTitle = (value) => {
+    setTitle(value);
+  };
+
+  const onChangeDescription = (value) => {
+    setDescription(value);
   };
 
   const onChangeLink = (value) => {
     setLink(value);
   };
 
-  const onChangeDone = (value) => {
-    setDone(value);
+  const onChangePicture = (value) => {
+    setPicture(value);
   };
 
   return (
@@ -121,7 +130,7 @@ const CrudDefis = () => {
           onPress={handleVisibleModal}
           style={styles.btnNewContainer}
         >
-          <Text style={styles.textButton}> Add New Challenge</Text>
+          <Text style={styles.textButton}> Add New session program</Text>
         </TouchableOpacity>
       </View>
       <Modal animationType="slide" visible={visible}>
@@ -130,48 +139,49 @@ const CrudDefis = () => {
             <TouchableOpacity onPress={handleVisibleModal}>
               <Text style={styles.txtClose}> Close</Text>
             </TouchableOpacity>
-
             <TextInput
-              value={goal}
+              value={title}
               style={styles.text_input}
-              placeholder="Description goal"
-              onChangeText={onChangeGoal}
+              placeholder="Program Title"
+              onChangeText={onChangeTitle}
+            />
+            <TextInput
+              value={description}
+              style={styles.text_input}
+              placeholder="Program Description"
+              onChangeText={onChangeDescription}
             />
             <TextInput
               value={link}
               style={styles.text_input}
-              placeholder="Challenge Link"
+              placeholder="Program video Link"
               onChangeText={onChangeLink}
             />
-            <Text style={styles.text}>
-              Did the player successfully complete their challenge? ?
-            </Text>
-            <View style={styles.switchStyle}>
-              <Switch
-                value={done}
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={done ? "#f5dd4b" : "#f4f3f4"}
-                onValueChange={onChangeDone}
-              />
-            </View>
+            <TextInput
+              value={picture}
+              style={styles.text_input}
+              placeholder=" Program picture"
+              onChangeText={onChangePicture}
+            />
 
             <TouchableOpacity onPress={handleSave} style={styles.btnContainer}>
               <Text style={styles.textButton}>
                 {" "}
-                {hideId == null ? "Add Defi" : "Update"}
+                {hideId == null ? "Add program" : "Update"}
               </Text>
             </TouchableOpacity>
           </View>
         </SafeAreaView>
       </Modal>
       <ScrollView>
-        {defi.map((item, index) => {
+        {program.map((item, index) => {
           return (
             <View style={styles.item_course} key={index}>
               <View>
-                <Text style={styles.txt_name}>{item.goal}</Text>
+                <Text style={styles.txt_name}>{item.title}</Text>
+                <Text style={styles.txt_item}>{item?.description}</Text>
                 <Text style={styles.txt_item}>{item.link}</Text>
-                <Text style={styles.txt_item}>{String(item?.done)}</Text>
+                <Text style={styles.txt_item}>{item.picture}</Text>
               </View>
               <View>
                 <TouchableOpacity onPress={() => handleDelete(item)}>
@@ -189,7 +199,7 @@ const CrudDefis = () => {
   );
 };
 
-export default CrudDefis;
+export default CrudPrograms;
 
 const styles = StyleSheet.create({
   header_container: {
