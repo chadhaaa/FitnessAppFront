@@ -1,24 +1,30 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-
-const Home = ({ navigation }) => {
+import { Card, Button, Title, Paragraph } from "react-native-paper";
+import musculation from "../../assets/musculation.png";
+const Home = () => {
   return (
-    <View>
-      <Text> This is where all you stuff goes !</Text>
-      {/* <Button
-        title="Competences"
-        onPress={() => navigation.navigate("Competences")}
+    <Card style={Styles.container}>
+      <Card.Content>
+        <Title>FitnessApp By Team 9</Title>
+      </Card.Content>
+      <Card.Cover
+        source={{
+          musculation,
+        }}
       />
-      <Button
-        title="Invite a Player"
-        onPress={() => navigation.navigate("InvitePlayer")}
-      /> */}
-      <Button
-        title="Handle Statistics"
-        onPress={() => navigation.navigate("Statistics")}
-      />
-    </View>
+      <Card.Content>
+        <Paragraph>Explore the App ! </Paragraph>
+      </Card.Content>
+    </Card>
   );
 };
 
 export default Home;
+
+const Styles = StyleSheet.create({
+  container: {
+    alignContent: "center",
+    margin: 37,
+  },
+});

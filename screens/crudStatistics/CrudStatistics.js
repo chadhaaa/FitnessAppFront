@@ -326,7 +326,6 @@ const styles = StyleSheet.create({
   item_course: {
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: "#e2e2e2",
     flexDirection: "row",
     justifyContent: "space-between",
   },
