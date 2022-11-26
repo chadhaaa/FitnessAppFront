@@ -167,7 +167,6 @@ const CrudStatistics = () => {
   return (
     <SafeAreaView>
       <View style={styles.header_container}>
-        <Text style={styles.txt_main}> Statistics</Text>
         <TouchableOpacity
           onPress={handleVisibleModal}
           style={styles.btnNewContainer}
@@ -181,9 +180,7 @@ const CrudStatistics = () => {
             <TouchableOpacity onPress={handleVisibleModal}>
               <Text style={styles.txtClose}> Close</Text>
             </TouchableOpacity>
-            <Text>{hideId}</Text>
-            <Text>{title}</Text>
-            <Text>{description}</Text>
+
             <TextInput
               value={title}
               style={styles.text_input}
@@ -288,7 +285,7 @@ const CrudStatistics = () => {
                   {(item.type[0] && item?.type[0].value) || item.type[0]}
                 </Text>
                 <Text style={styles.txt_item}>{item?.description}</Text>
-                <Text style={styles.txt_item}>{item?.currentState}</Text>
+                <Text style={styles.txt_item}>{item.currentState}</Text>
                 <Text style={styles.txt_item}>{item.link}</Text>
                 <Text style={styles.txt_item}>{String(item?.visibility)}</Text>
                 <Text style={styles.txt_item}>
@@ -365,5 +362,16 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderRadius: 10,
     marginTop: 10,
+  },
+  textButton: {
+    marginTop: 10,
+    fontSize: 22,
+    color: "green",
+    textAlign: "center",
+  },
+  txtClose: {
+    marginTop: 10,
+    fontSize: 22,
+    color: "red",
   },
 });
