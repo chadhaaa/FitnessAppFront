@@ -15,7 +15,6 @@ import { Picker } from "@react-native-picker/picker";
 
 const CrudStatistics = () => {
   const [stat, setStat] = useState([]);
-
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
