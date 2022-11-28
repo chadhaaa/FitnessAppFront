@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Picker } from "@react-native-picker/picker";
+//import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const CrudEvents = () => {
@@ -21,10 +21,10 @@ const CrudEvents = () => {
   const [visible, setVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [dateDebut, setDateDebut] = useState(new Date());
-  const [dateFin, setDateFin] = useState(new Date());
-  const [mode, setMode] = useState("dateDebut");
+  const [dateDebut, setDateDebut] = useState(new Date(Date.now()));
+  const [dateFin, setDateFin] = useState(new Date(Date.now()));
   const [show, setShow] = useState(false);
+  const [mode, setMode] = useState("date");
   const [hour, setHour] = useState("");
   const [place, setPlace] = useState("");
   const [visibility, setVisibility] = useState(false);
@@ -33,6 +33,11 @@ const CrudEvents = () => {
   useEffect(() => {
     getEvents();
   }, []);
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
 
   const getEvents = async () => {
     const headers = {
@@ -128,11 +133,6 @@ const CrudEvents = () => {
     setVisible(true);
   };
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
   const handleVisibleModal = () => {
     setVisible(!visible);
     setHideId(null);
@@ -146,14 +146,20 @@ const CrudEvents = () => {
     setDescription(value);
   };
 
-  const onChangeDateDebut = (event, selectedDate) => {
-    const currentDate = selectedDate || dateDebut;
+  const onChangeDateDebut = (event, value) => {
+    const currentDate = value;
     setDateDebut(currentDate);
+    if (Platform.OS === "android") {
+      setShow(false);
+    }
   };
 
-  const onChangeDateFin = (event, selectedDate) => {
-    const currentDate = selectedDate || dateFin;
+  const onChangeDateFin = (event, value) => {
+    const currentDate = value;
     setDateFin(currentDate);
+    if (Platform.OS === "android") {
+      setShow(false);
+    }
   };
 
   const onChangeHour = (value) => {
@@ -211,41 +217,69 @@ const CrudEvents = () => {
             </View>
 
             <Text style={styles.text}>Event start date </Text>
-            <View style={styles.textButton}>
-              <Button
-                title="Start date"
-                onPress={() => showMode("dateDebut")}
-              />
-            </View>
+            {!show && (
+              <View style={styles.btnContainer}>
+                <Button
+                  style={styles.textButton}
+                  title="Start date"
+                  onPress={() => showMode("date")}
+                />
+              </View>
+            )}
 
             <Text style={styles.text}>Event End Date </Text>
-            <View style={styles.textButton}>
-              <Button title="End date" onPress={() => showMode("dateFin")} />
-            </View>
+            {!show && (
+              <View style={styles.btnContainer}>
+                <Button
+                  style={styles.textButton}
+                  title="End date"
+                  onPress={() => showMode("date")}
+                />
+              </View>
+            )}
 
             <Text style={styles.text}>Time of the event </Text>
-            <View style={styles.textButton}>
-              <Button title="Time" onPress={() => showMode("time")} />
-            </View>
+            {!show && (
+              <View style={styles.btnContainer}>
+                <Button
+                  tyle={styles.textButton}
+                  title="Time"
+                  onPress={() => showMode("time")}
+                />
+              </View>
+            )}
 
             {show && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={dateDebut}
-                mode={mode}
+                mode={"date"}
+                display={Platform.OS === "ios" ? "spinner" : "default"}
                 is24Hour={true}
-                display="default"
                 onChange={onChangeDateDebut}
+                style={styles.datePicker}
               />
             )}
             {show && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={dateFin}
-                mode={mode}
+                mode={"date"}
+                display={Platform.OS === "ios" ? "spinner" : "default"}
                 is24Hour={true}
-                display="default"
                 onChange={onChangeDateFin}
+                style={styles.datePicker}
+              />
+            )}
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={hour}
+                mode={"time"}
+                display={Platform.OS === "ios" ? "spinner" : "default"}
+                is24Hour={true}
+                onChange={onChangeHour}
+                //style={styles.datePicker}
               />
             )}
             <TextInput
@@ -314,6 +348,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 5,
   },
+  btnContainer: {
+    padding: 30,
+  },
   txt_name: {
     fontSize: 18,
     marginTop: 5,
@@ -353,5 +390,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 22,
     color: "red",
+  },
+  datePicker: {
+    width: 320,
+    height: 260,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
 });
