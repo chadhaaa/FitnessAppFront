@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import OneSeance from "./GetOneSessionPage";
 import { useIsFocused } from "@react-navigation/native";
+import { Rating } from "react-native-ratings";
 
 const GetOneSeance = ({ route, navigation }) => {
   const isFocused = useIsFocused();
@@ -85,6 +86,16 @@ const GetOneSeance = ({ route, navigation }) => {
                 <Text>{item.compId.description}</Text>
                 <Text>Link :</Text>
                 <Text>{item.compId.link}</Text>
+                <Text> Star Rating :</Text>
+                <Rating
+                  startingValue={item.compId.stars}
+                  type="custom"
+                  ratingColor="yellow"
+                  ratingBackgroundColor="grey"
+                  imageSize={30}
+                  readonly={true}
+                  style={{ paddingVertical: 10 }}
+                />
               </View>
             ))
           )}

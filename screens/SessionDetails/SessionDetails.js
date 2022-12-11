@@ -14,6 +14,7 @@ const Seance = ({
   id,
 }) => {
   const navigation = useNavigation();
+
   return (
     <ScrollView>
       <View>
@@ -23,8 +24,6 @@ const Seance = ({
         <Text>{hour}</Text>
         <Text>Feedback</Text>
         <Text>{feedback}</Text>
-        <Text>Id</Text>
-        <Text>{id}</Text>
         <Button
           title="Show Details"
           onPress={() =>
