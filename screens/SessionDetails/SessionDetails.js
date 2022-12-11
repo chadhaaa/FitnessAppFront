@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,24 +15,26 @@ const Seance = ({
 }) => {
   const navigation = useNavigation();
   return (
-    <View>
-      <Text>Day</Text>
-      <Text>{day}</Text>
-      <Text>Hour</Text>
-      <Text>{hour}</Text>
-      <Text>Feedback</Text>
-      <Text>{feedback}</Text>
-      <Text>Id</Text>
-      <Text>{id}</Text>
-      <Button
-        title="Show Details"
-        onPress={() =>
-          navigation.navigate("One Session Details", {
-            sessionDetails: id,
-          })
-        }
-      />
-    </View>
+    <ScrollView>
+      <View>
+        <Text>Day</Text>
+        <Text>{day}</Text>
+        <Text>Hour</Text>
+        <Text>{hour}</Text>
+        <Text>Feedback</Text>
+        <Text>{feedback}</Text>
+        <Text>Id</Text>
+        <Text>{id}</Text>
+        <Button
+          title="Show Details"
+          onPress={() =>
+            navigation.navigate("One Session Details", {
+              sessionDetails: id,
+            })
+          }
+        />
+      </View>
+    </ScrollView>
   );
 };
 
