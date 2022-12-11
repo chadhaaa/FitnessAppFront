@@ -36,7 +36,7 @@ const CrudStatistics = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.197:8000/api/statistics", { headers })
+      .get("http://192.168.124.4:8000/api/statistics", { headers })
       .then((res) => {
         console.log(res);
         setStat(res.data);
@@ -50,7 +50,7 @@ const CrudStatistics = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.197:8000/api/statistic/" + item._id, {
+      .delete("http://192.168.124.4:8000/api/statistic/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -74,7 +74,7 @@ const CrudStatistics = () => {
         statAlert: statAlert,
       };
       axios
-        .post("http://192.168.1.197:8000/api/statistic", formdata)
+        .post("http://192.168.124.4:8000/api/statistic", formdata)
         .then((res) => {
           const response = res.data;
           getStats();
@@ -103,7 +103,7 @@ const CrudStatistics = () => {
         statAlert: statAlert,
       };
       axios
-        .put("http://192.168.1.197:8000/api/statistic/" + hideId, formdata)
+        .put("http://192.168.124.4:8000/api/statistic/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getStats();
