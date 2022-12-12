@@ -32,16 +32,18 @@ const UpdatePlayer = () => {
 
   // Operations on Competences
   const [comp, setComp] = useState([]);
-  const [stateComps, setStateComps] = useState([]);
   const [everyComp, setEveryComp] = useState([]);
 
   // Operations on Statistics
   const [stats, setStats] = useState([]);
-  const [stateStats, setStateStats] = useState([]);
   const [everyStat, setEveryStat] = useState([]);
 
   const chooseCom = (value) => {
     setComp(value);
+  };
+
+  const chooseStat = (value) => {
+    setStats(value);
   };
 
   const updateProfile = () => {
@@ -57,7 +59,7 @@ const UpdatePlayer = () => {
       scholar: scholar,
       email: email,
       password: password,
-      stats: stateStats,
+      stats: stats,
       comp: comp,
       active: active,
     };
@@ -89,10 +91,13 @@ const UpdatePlayer = () => {
     if (loading3) {
       axios
         .get(
-          `http://192.168.1.197:8000/api/statistics/63934a6595f00413f328a9bb`
+          `http://192.168.1.197:8000/api/statistics/628591301cbedd1f6918329b`
         )
         .then((response) => {
-          setEveryStat(response.data);
+          const newArray1 = response.data.map((item) => {
+            return { key: item._id, value: item.title };
+          });
+          setEveryStat(newArray1);
           setLoading3(false);
         });
     }
@@ -196,10 +201,17 @@ const UpdatePlayer = () => {
             onValueChange={changeActivityPlayer}
           />
         </View>
-
+        <Text>Choose Competence :</Text>
         <MultipleSelectList
           setSelected={chooseCom}
           data={everyComp}
+          save="key"
+          label="Categories"
+        />
+        <Text>Choose Statistic :</Text>
+        <MultipleSelectList
+          setSelected={chooseStat}
+          data={everyStat}
           save="key"
           label="Categories"
         />
