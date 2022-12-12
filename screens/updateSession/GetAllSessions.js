@@ -4,15 +4,11 @@ import axios from "axios";
 import Seance from "./SessionDetails";
 import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
-import Calendar from "react-native-calendar-range-picker";
-import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
-const GetSeance = ({ navigation }) => {
+const GetAllSessions = ({ navigation }) => {
   const [sessions, setSession] = useState([]);
   const isFocused = useIsFocused();
-  const [data, setData] = useState(sessions);
 
   useEffect(() => {
     getSessions();
@@ -25,25 +21,9 @@ const GetSeance = ({ navigation }) => {
     setSession(response.data);
   };
 
-  const onDateNowChange = (value) => {
-    const dataChange = sessions.filter((session) => session.day === value);
-    setSession(dataChange);
-  };
-
   return (
     <ScrollView>
       <View>
-        <View>
-          <CalendarPicker
-            onDateChange={onDateNowChange}
-            // allowRangeSelection={true}
-          />
-          <DatePicker mode="datepicker" onDateChange={onDateNowChange} />
-          <Button title="Filter" onPress={onDateNowChange} />
-        </View>
-        {/* <View>
-          <Calendar singleSelectMode onChange={onDateNowChange} />
-        </View> */}
         <Text>Sessions List : </Text>
         {sessions.map(function (session) {
           return (
@@ -71,4 +51,4 @@ const GetSeance = ({ navigation }) => {
   );
 };
 
-export default GetSeance;
+export default GetAllSessions;

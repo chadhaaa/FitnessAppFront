@@ -27,8 +27,16 @@ const Seance = ({
         <Button
           title="Show Details"
           onPress={() =>
-            navigation.navigate("One Session Details", {
+            navigation.navigate("Session Detail (coach)", {
               sessionDetails: id,
+            })
+          }
+        />
+        <Button
+          title="Update Session"
+          onPress={() =>
+            navigation.navigate("Update Session", {
+              sessionUpdate: id,
             })
           }
         />

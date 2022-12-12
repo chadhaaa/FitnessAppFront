@@ -2,10 +2,12 @@ import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const UpdateSession = () => {
+const UpdateSession = ({ route, navigation }) => {
+  const { sessionUpdate } = route.params;
   const [day, setDay] = useState(new Date());
   const [hour, setHour] = useState("");
   const [cancellation, setCancellation] = useState("");
@@ -27,6 +29,8 @@ const UpdateSession = () => {
   const [mode, setMode] = useState("day");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("Empty");
+
+  const isFocused = useIsFocused();
 
   const chooseCom = (value) => {
     setComp(value);
@@ -69,7 +73,7 @@ const UpdateSession = () => {
     };
 
     axios.put(
-      `http://192.168.1.197:8000/api/SessionUpdate/6282bc1aa7beeceeb106a67d`,
+      "http://192.168.1.197:8000/api/SessionUpdate/" + sessionUpdate,
       formdata
     );
   };
@@ -107,9 +111,7 @@ const UpdateSession = () => {
   useEffect(() => {
     if (loading) {
       axios
-        .get(
-          `http://localhost:8000/api/sessionDetails/6282bc1aa7beeceeb106a67d`
-        )
+        .get("http://192.168.1.197:8000/api/sessionDetails/" + sessionUpdate)
         .then((res) => {
           console.log({ response: { ...res } });
           setDay(res.data.player.day);
@@ -182,6 +184,10 @@ const UpdateSession = () => {
           />
         )}
         <Button title="Update Session" onPress={updateSession} />
+        <Button
+          title="Back to List"
+          onPress={() => navigation.navigate("Home")}
+        />
       </View>
     </ScrollView>
   );

@@ -6,7 +6,7 @@ import OneSeance from "./GetOneSessionPage";
 import { useIsFocused } from "@react-navigation/native";
 import { Rating } from "react-native-ratings";
 
-const GetOneSeance = ({ route, navigation }) => {
+const GetSessionDetail = ({ route, navigation }) => {
   const isFocused = useIsFocused();
 
   const { sessionDetails } = route.params;
@@ -19,9 +19,6 @@ const GetOneSeance = ({ route, navigation }) => {
 
   const getSession = async () => {
     await axios
-      //   .get(
-      //     `http://192.168.1.197:8000/api/sessionDetails/6282bc1aa7beeceeb106a67b`
-      //   )
       .get("http://192.168.1.197:8000/api/sessionDetails/" + sessionDetails)
       .then((response) => {
         console.log(response);
@@ -152,11 +149,11 @@ const GetOneSeance = ({ route, navigation }) => {
         </View>
         <Button
           title="Back to List"
-          onPress={() => navigation.navigate("Sessions Lists")}
+          onPress={() => navigation.navigate("List of Sessions (coach)")}
         />
       </View>
     </ScrollView>
   );
 };
 
-export default GetOneSeance;
+export default GetSessionDetail;

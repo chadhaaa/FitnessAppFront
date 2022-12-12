@@ -1,17 +1,7 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import { useState } from "react";
-import axios from "axios";
 
-const OneSeance = ({
-  day,
-  idPlace,
-  cancellation,
-  reason,
-  feedback,
-  hour,
-  programId,
-}) => {
+const OneSeance = ({ day, cancellation, reason, feedback, hour }) => {
   return (
     <ScrollView>
       <View>
