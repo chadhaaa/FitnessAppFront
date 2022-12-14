@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
-import Calendar from "react-native-calendar-range-picker";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 
 const GetSeance = ({ navigation }) => {
