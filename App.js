@@ -8,9 +8,25 @@ import CrudProgram from "./screens/CrudProgramSeance/crudProgramSeance";
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
+
+import { useEffect } from "react";
+import axios from "axios";
+
+// import BASE_URL from "./Constants/Index";
+
 const Drawer = createDrawerNavigator();
 
 const App = () => {
+  const setUrlConfig = () => {
+    console.log("called setUrlConfig");
+    axios.defaults.baseURL = "http://192.168.1.197:8000/";
+    // axios.defaults.baseURL = BASE_URL
+  };
+
+  useEffect(() => {
+    setUrlConfig();
+  }, []);
+
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">

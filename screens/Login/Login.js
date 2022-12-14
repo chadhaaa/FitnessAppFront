@@ -8,19 +8,21 @@ import {
   Dimensions,
 } from "react-native";
 import React from "react";
-// import { styles } from "./Styles";
-import { useTheme } from "@react-navigation/native";
-import { useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { moderateScale, scale } from "react-native-size-matters";
+import * as yup from "yup";
+import { Formik, Field } from "formik";
+import { loginPlayer } from "../Api/Auth/Index";
+
+const signInValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter a valid email !")
+    .required("Email is required !"),
+  password: yup.string().required("Password is required"),
+});
 
 const Login = () => {
-  // const {
-  //   colors: { background, text, "gray", card, secondary, primary },
-  //   dark,
-  // } = useTheme();
-
-  useEffect(() => {}, []);
   return (
     <View style={styles.loginMain}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -32,55 +34,100 @@ const Login = () => {
           </Text>
         </View>
         <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
-            <View style={styles.wrapper}>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter your Email"
-                keyboardType="email-address"
-              />
-            </View>
-            <View style={styles.wrapper}>
-              <View style={styles.input}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <View>
+          <Formik
+            validationSchema={signInValidationSchema}
+            initialValues={{ email: "", password: "" }}
+            onSubmit={async (values) => {
+              console.log("values", values);
+              loginPlayer(values)
+                .then((res) => {
+                  console.log("response", res);
+                })
+                .catch((err) => {
+                  console.log("error", err);
+                });
+            }}
+          >
+            {({
+              handleSubmit,
+              isValid,
+              values,
+              errors,
+              handleChange,
+              touched,
+            }) => (
+              <>
+                <View style={styles.inputContainer}>
+                  <View style={styles.wrapper}>
                     <TextInput
-                      placeholder="Enter your Password"
-                      secureTextEntry={true}
-                      style={{
-                        height: scale(45),
-                        color: "#472183",
-                        fontWeight: "bold",
-                      }}
+                      style={styles.input}
+                      placeholder="Enter your Email"
+                      keyboardType="email-address"
+                      name="email"
+                      onChangeText={handleChange("email")}
                     />
+                    {errors.email && touched.email && (
+                      <Text style={{ fontSize: 10, color: "red" }}>
+                        {errors.email}
+                      </Text>
+                    )}
                   </View>
-                  <TouchableOpacity style={{ alignSelf: "center" }}>
-                    <Ionicons name="key-outline" size={20} color={"#472183"} />
+                  <View style={styles.wrapper}>
+                    <View style={styles.input}>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <View>
+                          <TextInput
+                            placeholder="Enter your Password"
+                            secureTextEntry={true}
+                            style={{
+                              height: scale(45),
+                              color: "#472183",
+                              fontWeight: "bold",
+                            }}
+                            name="password"
+                            onChangeText={handleChange("password")}
+                          />
+                          {errors.password && touched.password && (
+                            <Text style={{ fontSize: 10, color: "red" }}>
+                              {errors.password}
+                            </Text>
+                          )}
+                        </View>
+                        <TouchableOpacity style={{ alignSelf: "center" }}>
+                          <Ionicons
+                            name="key-outline"
+                            size={20}
+                            color={"#472183"}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.btnContainer}>
+                  <TouchableOpacity
+                    onPress={handleSubmit}
+                    style={{
+                      backgroundColor: "#82C3EC",
+                      height: scale(50),
+                      borderRadius: scale(10),
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: moderateScale(30),
+                    }}
+                  >
+                    <Text style={{ color: "#fff", fontSize: 19 }}>Login</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.btnContainer}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "#82C3EC",
-                height: scale(50),
-                borderRadius: scale(10),
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: moderateScale(30),
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 19 }}>Login</Text>
-            </TouchableOpacity>
-          </View>
+              </>
+            )}
+          </Formik>
         </View>
         <View style={styles.footerContainer}>
           <View style={styles.footerContainerInner}>
