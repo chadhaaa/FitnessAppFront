@@ -6,7 +6,7 @@ export const styles = (background, text, lightGray5, primary, dark) => {
   EStyleSheet.create({
     loginMain: {
       flex: 1,
-      backgroundColor: background,
+      backgroundColor: "gray",
       paddingLeft: moderateScale(20),
       paddingRight: moderateScale(20),
     },
@@ -17,7 +17,7 @@ export const styles = (background, text, lightGray5, primary, dark) => {
     welcomeText: {
       fontSize: moderateScale(30),
       fontWeight: "bold",
-      color: text,
+      color: "#4B56D2",
     },
     signInText: {
       color: lightGray5,

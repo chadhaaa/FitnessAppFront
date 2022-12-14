@@ -14,11 +14,11 @@ import { useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { moderateScale, scale } from "react-native-size-matters";
 
-const Login = () => {
-  // const {
-  //   colors: { background, text, "gray", card, secondary, primary },
-  //   dark,
-  // } = useTheme();
+const Register = () => {
+  //   const {
+  //     colors: { background, text, "gray", card, secondary, primary },
+  //     dark,
+  //   } = useTheme();
 
   useEffect(() => {}, []);
   return (
@@ -28,11 +28,23 @@ const Login = () => {
           <Text style={styles.welcomeText}> Welcome to FitnessApp</Text>
           <Text style={styles.signInText}>
             {" "}
-            Sign In to Access your Account !
+            Sign To to FitnessApp and Access Your features !
           </Text>
         </View>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
+            <View style={styles.wrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your First Name"
+              />
+            </View>
+            <View style={styles.wrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your Last Name"
+              />
+            </View>
             <View style={styles.wrapper}>
               <TextInput
                 style={styles.input}
@@ -78,15 +90,15 @@ const Login = () => {
                 marginTop: moderateScale(30),
               }}
             >
-              <Text style={{ color: "#fff", fontSize: 19 }}>Login</Text>
+              <Text style={{ color: "#fff", fontSize: 19 }}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.footerContainer}>
           <View style={styles.footerContainerInner}>
-            <Text style={styles.newUserText}>No account ? Register here</Text>
+            <Text style={styles.newUserText}>I am already a Member</Text>
             <TouchableOpacity>
-              <Text style={styles.signText}>Sign Up !</Text>
+              <Text style={styles.signText}>Sign In !</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -95,7 +107,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
   loginMain: {
@@ -126,7 +138,7 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(30),
   },
   input: {
-    height: moderateScale(49),
+    height: scale(49),
     color: "#472183",
     borderWidth: moderateScale(1),
     borderColor: "gray",

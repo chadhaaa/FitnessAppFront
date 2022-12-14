@@ -6,6 +6,8 @@ import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import CrudDefis from "./screens/crudDefis/crudDefis";
 import CrudProgram from "./screens/CrudProgramSeance/crudProgramSeance";
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
+import Login from "./screens/Login/Login";
+import Register from "./screens/Register/Register";
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
         <Drawer.Screen name="Invite Player" component={InvitePlayer} />
         <Drawer.Screen name="Challenges" component={CrudDefis} />
         <Drawer.Screen name="Session Program" component={CrudProgram} />
+        <Drawer.Screen name="Login" component={Login} />
+        <Drawer.Screen name="Register" component={Register} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
