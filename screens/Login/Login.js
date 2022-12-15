@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -13,6 +14,8 @@ import { moderateScale, scale } from "react-native-size-matters";
 import * as yup from "yup";
 import { Formik, Field } from "formik";
 import { loginPlayer } from "../Api/Auth/Index";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const signInValidationSchema = yup.object().shape({
   email: yup
@@ -23,6 +26,11 @@ const signInValidationSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.loginMain}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -38,13 +46,17 @@ const Login = () => {
             validationSchema={signInValidationSchema}
             initialValues={{ email: "", password: "" }}
             onSubmit={async (values) => {
+              setShowSpinner(true);
               console.log("values", values);
               loginPlayer(values)
                 .then((res) => {
                   console.log("response", res);
+                  setShowSpinner(false);
+                  navigation.navigate("Home");
                 })
                 .catch((err) => {
                   console.log("error", err);
+                  setShowSpinner(false);
                 });
             }}
           >
@@ -67,7 +79,13 @@ const Login = () => {
                       onChangeText={handleChange("email")}
                     />
                     {errors.email && touched.email && (
-                      <Text style={{ fontSize: 10, color: "red" }}>
+                      <Text
+                        style={{
+                          fontSize: 10,
+                          color: "red",
+                          marginTop: scale(5),
+                        }}
+                      >
                         {errors.email}
                       </Text>
                     )}
@@ -83,7 +101,7 @@ const Login = () => {
                         <View>
                           <TextInput
                             placeholder="Enter your Password"
-                            secureTextEntry={true}
+                            secureTextEntry={showPassword}
                             style={{
                               height: scale(45),
                               color: "#472183",
@@ -93,14 +111,25 @@ const Login = () => {
                             onChangeText={handleChange("password")}
                           />
                           {errors.password && touched.password && (
-                            <Text style={{ fontSize: 10, color: "red" }}>
+                            <Text
+                              style={{
+                                fontSize: 10,
+                                color: "red",
+                                marginTop: scale(5),
+                              }}
+                            >
                               {errors.password}
                             </Text>
                           )}
                         </View>
-                        <TouchableOpacity style={{ alignSelf: "center" }}>
+                        <TouchableOpacity
+                          onPress={() =>
+                            setShowPassword((prevState) => !prevState)
+                          }
+                          style={{ alignSelf: "center" }}
+                        >
                           <Ionicons
-                            name="key-outline"
+                            name={showPassword ? "key-outline" : "key"}
                             size={20}
                             color={"#472183"}
                           />
@@ -122,7 +151,16 @@ const Login = () => {
                       marginTop: moderateScale(30),
                     }}
                   >
-                    <Text style={{ color: "#fff", fontSize: 19 }}>Login</Text>
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 19,
+                        marginLeft: scale(5),
+                      }}
+                    >
+                      Login
+                    </Text>
+                    {showSpinner && <ActivityIndicator color="red" />}
                   </TouchableOpacity>
                 </View>
               </>
