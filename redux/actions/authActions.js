@@ -2,6 +2,7 @@ import {
   UPDATE_ONBOARDING_STATUS,
   UPDATE_USER_LOGIN,
   UPDATE_USER_ACCESS_TOKEN,
+  LOGOUT_ACTION,
 } from "../constants/Index";
 
 export const updateOnboarding = (status) => {
@@ -23,5 +24,11 @@ export const updateUserAccessToken = (accessToken) => {
   return {
     type: UPDATE_USER_ACCESS_TOKEN,
     accessToken,
+  };
+};
+
+export const logoutAction = () => {
+  return {
+    type: LOGOUT_ACTION,
   };
 };

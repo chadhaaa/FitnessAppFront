@@ -2,6 +2,7 @@ import {
   UPDATE_ONBOARDING_STATUS,
   UPDATE_USER_LOGIN,
   UPDATE_USER_ACCESS_TOKEN,
+  LOGOUT_ACTION,
 } from "../constants/Index";
 
 const initialState = {
@@ -23,6 +24,9 @@ const authReducer = (state = initialState, action) => {
 
     case UPDATE_USER_ACCESS_TOKEN:
       return { ...state, accessToken };
+
+    case LOGOUT_ACTION:
+      return { ...state, user };
 
     default:
       return state;
