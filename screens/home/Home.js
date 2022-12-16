@@ -6,23 +6,30 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 
 const Home = ({ ...props }) => {
+  const { user } = props;
+
   useEffect(() => {
     console.log("props", props);
   }, []);
   return (
-    <Card style={Styles.container}>
-      <Card.Content>
-        <Title>FitnessApp By Team 9</Title>
-      </Card.Content>
-      <Card.Cover
-        source={{
-          musculation,
-        }}
-      />
-      <Card.Content>
-        <Paragraph>Explore the App ! </Paragraph>
-      </Card.Content>
-    </Card>
+    <View>
+      <Text> {user._id}</Text>
+      <Text> {user.token}</Text>
+
+      <Card style={Styles.container}>
+        <Card.Content>
+          <Title>FitnessApp By Team 9</Title>
+        </Card.Content>
+        <Card.Cover
+          source={{
+            musculation,
+          }}
+        />
+        <Card.Content>
+          <Paragraph>Explore the App ! </Paragraph>
+        </Card.Content>
+      </Card>
+    </View>
   );
 };
 
