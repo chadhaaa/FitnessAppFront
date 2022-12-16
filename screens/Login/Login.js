@@ -16,6 +16,7 @@ import { Formik, Field } from "formik";
 import { loginPlayer } from "../Api/Auth/Index";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+// import { showSnackBar } from "../../utils/SnackBar";
 
 const signInValidationSchema = yup.object().shape({
   email: yup
@@ -53,10 +54,12 @@ const Login = () => {
                   console.log("response", res);
                   setShowSpinner(false);
                   navigation.navigate("Home");
+                  // showSnackBar("Successfully LoggedIn");
                 })
                 .catch((err) => {
-                  console.log("error", err);
+                  console.log("error", err.response.data?.msg);
                   setShowSpinner(false);
+                  // showSnackBar(err.response.data?.msg, "ERROR");
                 });
             }}
           >

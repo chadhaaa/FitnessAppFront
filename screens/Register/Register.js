@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -16,6 +17,7 @@ import { Formik } from "formik";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { registerPlayer } from "../Api/Auth/Index";
+// import { showSnackBar } from "../../utils/SnackBar";
 
 const signUpValidationSchema = yup.object().shape({
   firstname: yup.string().required("Firstname is required"),
@@ -67,11 +69,14 @@ const Register = () => {
                 .then((res) => {
                   console.log("response", res);
                   setShowSpinner(false);
-                  navigation.navigate("Login");
+                  Alert.alert("", res.msg, [
+                    { text: "OK", onPress: () => navigation.navigate("Login") },
+                  ]);
                 })
                 .catch((err) => {
                   console.log("error", err.response.data?.msg);
                   setShowSpinner(false);
+                  // showSnackBar(err.response.data?.msg, "ERROR");
                 });
             }}
           >
