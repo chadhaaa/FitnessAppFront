@@ -16,7 +16,10 @@ import { Formik, Field } from "formik";
 import { loginPlayer } from "../Api/Auth/Index";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-// import { showSnackBar } from "../../utils/SnackBar";
+import { connect } from "react-redux";
+import * as authActions from "../../redux/actions/authActions";
+import PropTypes from "prop-types";
+import { setTokenInterceptor } from "../../utils/setTokenInterceptor";
 
 const signInValidationSchema = yup.object().shape({
   email: yup
@@ -26,7 +29,9 @@ const signInValidationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
-const Login = () => {
+const Login = ({ ...props }) => {
+  const { updateUserLogin, updateUserAccessToken, user, isLoggedIn } = props;
+
   const [showSpinner, setShowSpinner] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
 
@@ -54,12 +59,15 @@ const Login = () => {
                   console.log("response", res);
                   setShowSpinner(false);
                   navigation.navigate("Home");
-                  // showSnackBar("Successfully LoggedIn");
+                  updateUserLogin(res, true);
+                  updateUserAccessToken(res.token);
+                  console.log("User coming from state", user);
+                  console.log("isLoggedIn coming from state", isLoggedIn);
+                  setTokenInterceptor(res);
                 })
                 .catch((err) => {
                   console.log("error", err.response.data?.msg);
                   setShowSpinner(false);
-                  // showSnackBar(err.response.data?.msg, "ERROR");
                 });
             }}
           >
@@ -109,6 +117,7 @@ const Login = () => {
                               height: scale(45),
                               color: "#472183",
                               fontWeight: "bold",
+                              width: "93%",
                             }}
                             name="password"
                             onChangeText={handleChange("password")}
@@ -183,7 +192,28 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  user: PropTypes.object.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  updateUserLogin: PropTypes.func.isRequired,
+  updateUserAccessToken: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  updateUserLogin: (user, isLoggedIn) =>
+    dispatch(authActions.updateUserLogin(user, isLoggedIn)),
+  updateUserAccessToken: (token) =>
+    dispatch(authActions.updateUserAccessToken(token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
   loginMain: {

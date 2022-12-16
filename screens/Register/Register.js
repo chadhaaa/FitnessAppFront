@@ -17,7 +17,6 @@ import { Formik } from "formik";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { registerPlayer } from "../Api/Auth/Index";
-// import { showSnackBar } from "../../utils/SnackBar";
 
 const signUpValidationSchema = yup.object().shape({
   firstname: yup.string().required("Firstname is required"),
@@ -76,7 +75,6 @@ const Register = () => {
                 .catch((err) => {
                   console.log("error", err.response.data?.msg);
                   setShowSpinner(false);
-                  // showSnackBar(err.response.data?.msg, "ERROR");
                 });
             }}
           >

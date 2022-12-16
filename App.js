@@ -12,7 +12,14 @@ import Register from "./screens/Register/Register";
 import { useEffect } from "react";
 import axios from "axios";
 
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import reduxStore from "./redux/Index";
+
 // import BASE_URL from "./Constants/Index";
+
+export const reduxPersistStore = persistStore(reduxStore);
 
 const Drawer = createDrawerNavigator();
 
@@ -28,19 +35,23 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Statistics" component={CrudStatistics} />
+    <Provider store={reduxStore}>
+      <PersistGate persistor={reduxPersistStore}>
+        <NavigationContainer>
+          <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Statistics" component={CrudStatistics} />
 
-        <Drawer.Screen name="Competences" component={CrudCompetences} />
-        <Drawer.Screen name="Invite Player" component={InvitePlayer} />
-        <Drawer.Screen name="Challenges" component={CrudDefis} />
-        <Drawer.Screen name="Session Program" component={CrudProgram} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Register" component={Register} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+            <Drawer.Screen name="Competences" component={CrudCompetences} />
+            <Drawer.Screen name="Invite Player" component={InvitePlayer} />
+            <Drawer.Screen name="Challenges" component={CrudDefis} />
+            <Drawer.Screen name="Session Program" component={CrudProgram} />
+            <Drawer.Screen name="Login" component={Login} />
+            <Drawer.Screen name="Register" component={Register} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 export default App;

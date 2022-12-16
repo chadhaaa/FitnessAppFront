@@ -2,7 +2,13 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Card, Button, Title, Paragraph } from "react-native-paper";
 import musculation from "../../assets/musculation.png";
-const Home = () => {
+import { connect } from "react-redux";
+import { useEffect } from "react";
+
+const Home = ({ ...props }) => {
+  useEffect(() => {
+    console.log("props", props);
+  }, []);
   return (
     <Card style={Styles.container}>
       <Card.Content>
@@ -20,7 +26,18 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+    accessToken: state.auth.accessToken,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const Styles = StyleSheet.create({
   container: {
