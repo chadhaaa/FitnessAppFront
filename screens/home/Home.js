@@ -15,13 +15,17 @@ const Home = ({ ...props }) => {
 
   return (
     <View>
+      <Text>
+        {" "}
+        Hello {user.firstname} {user.lastname}
+      </Text>
       <Text> {user._id}</Text>
       <Text> {user.token}</Text>
       <Button title="logout" onPress={() => navigation.navigate("Login")} />
 
       <Card style={Styles.container}>
         <Card.Content>
-          <Title>FitnessApp By Team 9</Title>
+          <Title>FitnessApp By Chadha Hajji</Title>
         </Card.Content>
         <Card.Cover
           source={{
