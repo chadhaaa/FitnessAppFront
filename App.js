@@ -67,7 +67,7 @@ const App = () => {
             <Drawer.Screen
               name="Login"
               component={Login}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, unmountOnBlur: true }}
             />
             <Drawer.Screen
               name="Register"

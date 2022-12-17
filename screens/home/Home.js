@@ -1,20 +1,23 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import React from "react";
-import { Card, Button, Title, Paragraph } from "react-native-paper";
+import { Card, Title, Paragraph } from "react-native-paper";
 import musculation from "../../assets/musculation.png";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 const Home = ({ ...props }) => {
-  const { user } = props;
-
+  const { user, navigation } = props;
+  const isFocused = useIsFocused();
   useEffect(() => {
     console.log("props", props);
-  }, []);
+  }, [isFocused]);
+
   return (
     <View>
       <Text> {user._id}</Text>
       <Text> {user.token}</Text>
+      <Button title="logout" onPress={() => navigation.navigate("Login")} />
 
       <Card style={Styles.container}>
         <Card.Content>
