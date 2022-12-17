@@ -1,6 +1,10 @@
 import Home from "./screens/home/Home";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 import CrudStatistics from "./screens/crudStatistics/CrudStatistics";
 import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import CrudDefis from "./screens/crudDefis/crudDefis";
@@ -38,11 +42,37 @@ const App = () => {
     <Provider store={reduxStore}>
       <PersistGate persistor={reduxPersistStore}>
         <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Login">
+          <Drawer.Navigator
+            initialRouteName="Login"
+            drawerContent={(props) => {
+              const filteredProps = {
+                ...props,
+                state: {
+                  ...props.state,
+                  routeNames: props.state.routeNames.filter((routeName) => {
+                    routeName !== "Login";
+                  }),
+                  routes: props.state.routes.filter(
+                    (route) => route.name !== "Login"
+                  ),
+                },
+              };
+              return (
+                <DrawerContentScrollView {...filteredProps}>
+                  <DrawerItemList {...filteredProps} />
+                </DrawerContentScrollView>
+              );
+            }}
+          >
             <Drawer.Screen
               name="Login"
               component={Login}
               options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+              name="Register"
+              component={Register}
+              options={{ headerShown: false, drawerLabel: () => null }}
             />
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Statistics" component={CrudStatistics} />
@@ -50,11 +80,6 @@ const App = () => {
             <Drawer.Screen name="Invite Player" component={InvitePlayer} />
             <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen name="Session Program" component={CrudProgram} />
-            <Drawer.Screen
-              name="Register"
-              component={Register}
-              options={{ headerShown: false }}
-            />
           </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>
