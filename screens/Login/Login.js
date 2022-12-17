@@ -117,7 +117,6 @@ const Login = ({ ...props }) => {
                               height: scale(45),
                               color: "#472183",
                               fontWeight: "bold",
-                              width: "93%",
                             }}
                             name="password"
                             onChangeText={handleChange("password")}
@@ -182,7 +181,7 @@ const Login = ({ ...props }) => {
         <View style={styles.footerContainer}>
           <View style={styles.footerContainerInner}>
             <Text style={styles.newUserText}>No account ? Register here</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <Text style={styles.signText}>Sign Up !</Text>
             </TouchableOpacity>
           </View>

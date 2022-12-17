@@ -38,20 +38,28 @@ const App = () => {
     <Provider store={reduxStore}>
       <PersistGate persistor={reduxPersistStore}>
         <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Navigator initialRouteName="Login">
+            <Drawer.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Statistics" component={CrudStatistics} />
-
             <Drawer.Screen name="Competences" component={CrudCompetences} />
             <Drawer.Screen name="Invite Player" component={InvitePlayer} />
             <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen name="Session Program" component={CrudProgram} />
-            <Drawer.Screen name="Login" component={Login} />
-            <Drawer.Screen name="Register" component={Register} />
+            <Drawer.Screen
+              name="Register"
+              component={Register}
+              options={{ headerShown: false }}
+            />
           </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
   );
 };
+
 export default App;
