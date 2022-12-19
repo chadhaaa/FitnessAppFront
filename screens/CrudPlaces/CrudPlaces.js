@@ -8,31 +8,39 @@ import {
   TextInput,
   Modal,
   Switch,
+  Button,
+  Platform,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+//import { Picker } from "@react-native-picker/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
-const CrudDefis = () => {
-  const [defi, setDefi] = useState([]);
+const CrudPlaces = () => {
+  const [place, setPlace] = useState([]);
+  const [name , setName] = useState("");
+  const [countryState, setCountryState] = useState("");
+  const [country, setCountry] = useState('');
+  const [address, setAddress] = useState("");
   const [visible, setVisible] = useState(false);
-  const [goal, setGoal] = useState("");
-  const [link, setLink] = useState("");
-  const [done, setDone] = useState(false);
   const [hideId, setHideId] = useState(null);
 
   useEffect(() => {
-    getDefis();
+    getPlaces();
   }, []);
-  const getDefis = async () => {
+
+  
+
+  const getPlaces = async () => {
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.131.15:8000/api/challenges", { headers })
+      .get("http://192.168.131.15:8000/api/places", { headers })
       .then((res) => {
         console.log(res);
-        setDefi(res.data);
+        setPlace(res.data);
         console.log(res.data);
       })
       .catch((error) => console.log(error));
@@ -43,12 +51,12 @@ const CrudDefis = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.131.15:8000/api/challenge/" + item._id, {
+      .delete("http://192.168.131.15:8000/api/place/" + item._id, {
         headers,
       })
       .then((res) => {
         var respo = res.data;
-        getDefis();
+        getPlaces();
       })
       .catch((error) => console.log(error));
   };
@@ -56,45 +64,52 @@ const CrudDefis = () => {
   const handleSave = () => {
     if (hideId == null) {
       const formdata = {
-        goal: goal,
-        link: link,
-        done: done,
+        name: name,
+        countryState: countryState,
+        country: country,
+        address: address,
       };
       axios
-        .post("http://192.168.131.15:8000/api/challenge", formdata)
+        .post("http://192.168.131.15:8000/api/place", formdata)
         .then((res) => {
           const response = res.data;
-          getDefis();
-          setGoal("");
-          setLink("");
-          setDone(false);
+          getPlaces();
+          setName("");
+          setCountryState("");
+          setCountry("");
+          setAddress("");
           setVisible(false);
         });
     } else {
       const formdata = {
         _id: hideId,
-        goal: goal,
-        link: link,
-        done: done,
+        name: name,
+        countryState: countryState,
+        country: country,
+        address: address,
       };
       axios
-        .put("http://192.168.131.15:8000/api/challenge/" + hideId, formdata)
+        .put("http://192.168.131.15:8000/api/place/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
-          getDefis();
-          setGoal("");
-          setLink("");
-          setDone(false);
+          getPlaces();
+          setName("");
+          setCountryState("");
+          setCountry("");
+          setAddress("");
           setVisible(false);
         });
     }
   };
   const handleEdit = (item) => {
-    setVisible(true);
     setHideId(item._id);
-    setGoal(item.goal);
-    setLink(item.link);
-    setDone(item.done);
+    getPlaces();
+    setName("");
+    setCountryState("");
+    setCountry("");
+    setAddress("");
+    setVisible(false);
+    setVisible(true);
   };
 
   const handleVisibleModal = () => {
@@ -102,16 +117,20 @@ const CrudDefis = () => {
     setHideId(null);
   };
 
-  const onChangeGoal = (value) => {
-    setGoal(value);
+  const onChangeName = (value) => {
+    setName(value);
   };
 
-  const onChangeLink = (value) => {
-    setLink(value);
+  const onChangeCountryState = (value) => {
+    setCountryState(value);
   };
 
-  const onChangeDone = (value) => {
-    setDone(value);
+  const onChangeCountry = (value) => {
+    setCountry(value);
+  };
+
+  const onChangeAddress = (value) => {
+    setAddress(value);
   };
 
   return (
@@ -121,7 +140,7 @@ const CrudDefis = () => {
           onPress={handleVisibleModal}
           style={styles.btnNewContainer}
         >
-          <Text style={styles.textButton}> Add New Challenge</Text>
+          <Text style={styles.textButton}> Add New Place</Text>
         </TouchableOpacity>
       </View>
       <Modal animationType="slide" visible={visible}>
@@ -132,46 +151,48 @@ const CrudDefis = () => {
             </TouchableOpacity>
 
             <TextInput
-              value={goal}
+              value={name}
               style={styles.text_input}
-              placeholder="Description goal"
-              onChangeText={onChangeGoal}
+              placeholder="Place Name"
+              onChangeText={onChangeName}
             />
             <TextInput
-              value={link}
+              value={countryState}
               style={styles.text_input}
-              placeholder="Challenge Link"
-              onChangeText={onChangeLink}
+              placeholder="Place Country State"
+              onChangeText={onChangeCountryState}
             />
-            <Text style={styles.text}>
-              Did the player successfully complete their challenge? ?
-            </Text>
-            <View style={styles.switchStyle}>
-              <Switch
-                value={done}
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={done ? "#f5dd4b" : "#f4f3f4"}
-                onValueChange={onChangeDone}
-              />
-            </View>
+            <TextInput
+              value={country}
+              style={styles.text_input}
+              placeholder="Place Country"
+              onChangeText={onChangeCountry}
+            />
+            <TextInput
+              value={address}
+              style={styles.text_input}
+              placeholder="Place Address"
+              onChangeText={onChangeAddress}
+            />
 
             <TouchableOpacity onPress={handleSave} style={styles.btnContainer}>
               <Text style={styles.textButton}>
                 {" "}
-                {hideId == null ? "Add Defi" : "Update"}
+                {hideId == null ? "Add Place" : "Update"}
               </Text>
             </TouchableOpacity>
           </View>
         </SafeAreaView>
       </Modal>
       <ScrollView>
-        {defi.map((item, index) => {
+        {place.map((item, index) => {
           return (
             <View style={styles.item_course} key={index}>
               <View>
-                <Text style={styles.txt_name}>{item.goal}</Text>
-                <Text style={styles.txt_item}>{item.link}</Text>
-                <Text style={styles.txt_item}>{String(item?.done)}</Text>
+                <Text style={styles.txt_name}>{item.Name}</Text>
+                <Text style={styles.txt_item}>{item?.countryState}</Text>
+                <Text style={styles.txt_item}>{item.country}</Text>
+                <Text style={styles.txt_item}>{item.address}</Text>
               </View>
               <View>
                 <TouchableOpacity onPress={() => handleDelete(item)}>
@@ -189,7 +210,7 @@ const CrudDefis = () => {
   );
 };
 
-export default CrudDefis;
+export default CrudPlaces;
 
 const styles = StyleSheet.create({
   header_container: {
@@ -209,6 +230,9 @@ const styles = StyleSheet.create({
   txt_item: {
     fontSize: 14,
     marginTop: 5,
+  },
+  btnContainer: {
+    padding: 30,
   },
   txt_name: {
     fontSize: 18,
@@ -250,4 +274,5 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "red",
   },
+
 });
