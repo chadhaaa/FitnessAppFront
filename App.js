@@ -9,6 +9,12 @@ import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
 
 import CrudPlaces from "./screens/CrudPlaces/CrudPlaces";
 import PlayerProfile from "./screens/PlayerProfile/playerProfile";
+import SessionCancel from "./screens/SessionCancel/sessionCancel";
+import Login from "./screens/Login/Login";
+import Signup from "./screens/Signup/Signup";
+
+
+
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +31,9 @@ const App = () => {
 
         <Drawer.Screen name="Places" component={CrudPlaces} />
         <Drawer.Screen name="Profile" component={PlayerProfile} />
+        <Drawer.Screen name="Session Cancel" component={SessionCancel} />
+        <Drawer.Screen name="Login" component={Login} />
+        <Drawer.Screen name="Signup" component={Signup} />
 
       </Drawer.Navigator>
     </NavigationContainer>

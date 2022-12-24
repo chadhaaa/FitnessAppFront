@@ -30,7 +30,7 @@ const CrudPrograms = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.131.15:8000/api/programs", { headers })
+      .get("http://192.168.108.64:8000/api/programs", { headers })
       .then((res) => {
         console.log(res);
         setProgram(res.data);
@@ -44,7 +44,7 @@ const CrudPrograms = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.131.15:8000/api/program/" + item._id, {
+      .delete("http://192.168.108.64:8000/api/program/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -63,7 +63,7 @@ const CrudPrograms = () => {
         picture: picture,
       };
       axios
-        .post("http://192.168.131.15:8000/api/program", formdata)
+        .post("http://192.168.108.64:8000/api/program", formdata)
         .then((res) => {
           const response = res.data;
           getPrograms();
@@ -81,7 +81,7 @@ const CrudPrograms = () => {
         picture: picture,
       };
       axios
-        .put("http://192.168.131.15:8000/api/program/" + hideId, formdata)
+        .put("http://192.168.108.64:8000/api/program/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getPrograms();
