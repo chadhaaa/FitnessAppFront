@@ -16,7 +16,7 @@ import axios from "axios";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 
-const Signup = () => {
+const Signup = ({navigation}) => {
 
   const [firstname, setFirstname] = useState('')
 	const [lastname, setLastname] = useState('')
@@ -40,7 +40,9 @@ const Signup = () => {
   const onChangeBirthdate = (value) => {
     setBirthdate(value);
   };
-   
+  async function SwitchLogin(event){
+    navigation.navigate('Login')
+  }
 	async function signupCoach() {
         const formdata = {
 
@@ -90,6 +92,16 @@ const Signup = () => {
                     style={styles.btnNewContainer}
                   >
                   <Text style={styles.textButton}>Signup</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.text}>I already have an account!</Text>
+
+              <View style={styles.header_container}>
+                  <TouchableOpacity
+                    onPress={SwitchLogin}
+                    style={styles.btnNewContainer}
+                  >
+                  <Text style={styles.textButton}>Login</Text>
                 </TouchableOpacity>
               </View>
             </View>

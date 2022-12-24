@@ -13,8 +13,9 @@ import {
   } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Signup from "../Signup/Signup";
 
-const Login = () => {
+const Login = ({navigation}) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -24,18 +25,25 @@ const Login = () => {
   const onChangePassword = (value) => {
     setPassword(value);
   };
+  async function SwitchSignup(event){
+    navigation.navigate('Signup')
+  }
 	async function loginUser(event) {
 		const body = {
 			email: email,
 			password: password,
 		}
 		await axios
-			.post('http://192.168.119.54:8000/api/login', body)
+			.post('http://192.168.122.181:8000/api/login', body)
 			.then((response) => {
 				if (response.data.user) {
 					console.log(response.data.user._doc)
 					alert(response.data.user)
           alert(`Hello ${response.data.user._doc.firstName} ${response.data.user._doc.lastName}`)
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Main' }],
+          })
 					
 				}
 			})
@@ -73,6 +81,16 @@ const Login = () => {
                     style={styles.btnNewContainer}
                   >
                   <Text style={styles.textButton}>Login</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.text}>I don't have an account</Text>
+
+              <View style={styles.header_container}>
+                  <TouchableOpacity
+                    onPress={SwitchSignup}
+                    style={styles.btnNewContainer}
+                  >
+                  <Text style={styles.textButton}>Signup</Text>
                 </TouchableOpacity>
               </View>
             </View>
