@@ -34,10 +34,10 @@ const Login = ({navigation}) => {
 			password: password,
 		}
 		await axios
-			.post('http://192.168.122.181:8000/api/login', body)
+			.post('http://192.168.95.10:8000/api/login', body)
 			.then((response) => {
-				if (response.data.user) {
-					console.log(response.data.user._doc)
+				if (response.data.user && !response.data.user._doc.new) {
+					console.log(response.data.user._doc.new)
 					alert(response.data.user)
           alert(`Hello ${response.data.user._doc.firstName} ${response.data.user._doc.lastName}`)
           navigation.reset({
@@ -46,6 +46,10 @@ const Login = ({navigation}) => {
           })
 					
 				}
+        else if (response.data.user && response.data.user._doc.new) {
+          navigation.navigate('First Login' , {id : response.data.user._doc._id})
+        }
+
 			})
 			.catch((err) => {
         alert('1')
