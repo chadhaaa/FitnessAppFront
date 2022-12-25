@@ -53,7 +53,7 @@ const Signup = ({navigation}) => {
           new: true,
  }
 		await axios
-			.post('http://192.168.46.15:8000/api/signup', formdata)
+			.post('http://10.1.0.130:8000/api/signup', formdata)
 
 	}
 	return (

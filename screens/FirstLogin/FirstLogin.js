@@ -10,14 +10,15 @@ import {
     Switch,
     // Picker,
   } from "react-native";
+  import CheckBox from 'react-native-checkbox';
   import React, { useState, useEffect } from "react";
   import axios from "axios";
-  import { Rating } from "react-native-ratings";
   
   const FirstLogin = ({navigation , route}) => {
     const [discipline, setDiscipline] = useState('')
-	const [alertType, setAlertType] = useState([])
-  
+    const [alertType, setAlertType] = useState([])
+    const [isSelected, setSelection] = useState(false);
+    const alerts = ['number-session-not-attented','statistics-decreasing','near-objectif']
     useEffect(() => {
     });
 
@@ -27,7 +28,8 @@ import {
             alerts : alertType,
             new : false,
         }
-        axios.put('http://192.168.95.10:8000/api/coachUpdate/'+route.params.id, formdata)
+        console.log(route.params.id)
+        axios.put('http://10.1.0.130:8000/api/coachUpdate/'+route.params.id, formdata)
      
     };
   
@@ -36,9 +38,9 @@ import {
     };
   
     const onChangeAlerts = (e) => {
-        if(alertType.filter(el => el == e.target.value).length == 0)
-         setAlertType(state => [e.target.value, ...state]);
-         else setAlertType(alertType.filter(el => el!=e.target.value))
+      if(alertType.filter(el => el == e).length == 0){
+        setAlertType(state => [ e, ...state])}
+      else setAlertType(alertType.filter(el => el!=e))
     }
     return (
       <SafeAreaView>
@@ -52,6 +54,18 @@ import {
                 placeholder={"Discipline"}
                 onChangeText={onChangeDiscipline}
               />
+              {alerts.map((option) =>(
+                <CheckBox
+                label={option}
+                checked={alertType.includes(option)}
+                onChange={(e) => {onChangeAlerts(option)}}
+              
+              />
+              )
+               )}
+            
+              
+
               <TouchableOpacity onPress={updateCoachProfile} style={styles.btnContainer}>
                 <Text style={styles.textButton}>Save Infos</Text>
               </TouchableOpacity>
@@ -121,6 +135,21 @@ import {
       marginTop: 10,
       fontSize: 22,
       color: "red",
+    },
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    checkboxContainer: {
+      flexDirection: "row",
+      marginBottom: 20,
+    },
+    checkbox: {
+      alignSelf: "center",
+    },
+    label: {
+      margin: 8,
     },
   });
   

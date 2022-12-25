@@ -13,7 +13,6 @@ import {
   } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Signup from "../Signup/Signup";
 
 const Login = ({navigation}) => {
 	const [email, setEmail] = useState('')
@@ -34,7 +33,7 @@ const Login = ({navigation}) => {
 			password: password,
 		}
 		await axios
-			.post('http://192.168.95.10:8000/api/login', body)
+			.post('http://10.1.0.130:8000/api/login', body)
 			.then((response) => {
 				if (response.data.user && !response.data.user._doc.new) {
 					console.log(response.data.user._doc.new)

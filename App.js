@@ -17,10 +17,8 @@ const App = () => {
     <NavigationContainer>
 
       <Stack.Navigator>
-
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="First Login" component={FirstLogin}/>
-
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Main" component={Main} />
         
