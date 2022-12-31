@@ -10,6 +10,9 @@ import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import CrudDefis from "./screens/crudDefis/crudDefis";
 import CrudProgram from "./screens/CrudProgramSeance/crudProgramSeance";
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
+import UpdateSession from "./screens/updateSession/UpdateSession";
+import GetSessionDetail from "./screens/updateSession/GetOneSession";
+import GetAllSessions from "./screens/updateSession/GetAllSessions";
 import GetOneSeance from "./screens/SessionDetails/GetOneSession";
 import GetSeance from "./screens/SessionDetails/GetAllSessions";
 import CrudEvents from "./screens/CrudEvent/crudEvent";
@@ -122,6 +125,17 @@ const App = () => {
               component={GetOneSeance}
             />
             <Drawer.Screen name="Sessions Lists" component={GetSeance} />
+            <Drawer.Screen name="Update Session" component={UpdateSession} />
+
+        {/* coach route sessions + update  */}
+        <Drawer.Screen
+          name="Session Detail (coach)"
+          component={GetSessionDetail}
+        />
+        <Drawer.Screen
+          name="List of Sessions (coach)"
+          component={GetAllSessions}
+        />
             <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen name="Session Program" component={CrudProgram} />
           </Drawer.Navigator>
