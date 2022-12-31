@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Card style={Styles.container}>
       <Card.Content>
-        <Title>FitnessApp By Team 9</Title>
+        <Title>FitnessApp By Chadha Hajji</Title>
       </Card.Content>
       <Card.Cover
         source={{
