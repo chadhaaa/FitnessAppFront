@@ -1,5 +1,5 @@
 import Home from "./screens/home/Home";
-import { NavigationContainer } from "@react-navigation/native";
+import { Link, NavigationContainer } from "@react-navigation/native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -13,7 +13,7 @@ import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Provider } from "react-redux";
@@ -21,11 +21,15 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import reduxStore from "./redux/Index";
 
+import * as Linking from "expo-linking";
+
 // import BASE_URL from "./Constants/Index";
 
 export const reduxPersistStore = persistStore(reduxStore);
 
 const Drawer = createDrawerNavigator();
+
+const prefix = Linking.makeUrl("/Login");
 
 const App = () => {
   const setUrlConfig = () => {
@@ -34,14 +38,42 @@ const App = () => {
     // axios.defaults.baseURL = BASE_URL
   };
 
+  const [data, setData] = useState(null);
+
+  const linking = {
+    prefixes: [prefix],
+    config: {
+      screens: {
+        Login: "Login",
+      },
+    },
+  };
+
+  function handleDeepLink(event) {
+    let data = Linking.parse(event.url);
+    setData(data);
+  }
   useEffect(() => {
     setUrlConfig();
   }, []);
 
+  useEffect(() => {
+    async function getInitialURL() {
+      const initialURL = await Linking.getInitialURL();
+      if (initialURL) setData(Linking.parse(initialURL));
+    }
+    Linking.addEventListener("url", handleDeepLink);
+    if (!data) {
+      getInitialURL();
+    }
+    return () => {
+      Linking.removeEventListener("url");
+    };
+  }, []);
   return (
     <Provider store={reduxStore}>
       <PersistGate persistor={reduxPersistStore}>
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
           <Drawer.Navigator
             initialRouteName="Login"
             drawerContent={(props) => {
