@@ -1,17 +1,24 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ProfilePage from "./ProfilePage";
+import { connect } from "react-redux";
 
-const ViewProfile = () => {
+const ViewProfile = ({ ...props }) => {
   const [profile, setProfile] = useState([]);
   const [stat, setStat] = useState([]);
   const [Comp, setComp] = useState([]);
 
+  const { user } = props;
+  useEffect(() => {
+    console.log("user id ", user._id);
+  }, []);
   const getProfile = async () => {
     const response = await axios
-      .get(`http://192.168.1.197:8000/api/viewProfile/628591301cbedd1f6918329b`)
+      // .get(`http://192.168.1.197:8000/api/viewProfile/628591301cbedd1f6918329b`)
+      .get(`http://192.168.1.197:8000/api/viewProfile/${user._id}`)
+
       .then((response) => {
         setProfile(response.data.player);
         setStat(response.data.stats);
@@ -26,7 +33,7 @@ const ViewProfile = () => {
     getProfile();
   }, []);
   return (
-    <View>
+    <ScrollView>
       <Text>viewProfile</Text>
       <ProfilePage
         firstname={profile.firstname}
@@ -44,7 +51,7 @@ const ViewProfile = () => {
         {stat.map((item, index) => {
           if (item.statId.visibility) {
             return (
-              <View key={index}>
+              <View key={item.statId._id}>
                 <Text> Title :</Text>
                 <Text> {item.statId.title} </Text>
                 <Text> Link :</Text>
@@ -82,7 +89,7 @@ const ViewProfile = () => {
         {Comp.map((item, index) => {
           if (item.compId.visibility) {
             return (
-              <View key={index}>
+              <View key={item.compId._id}>
                 <Text>Name : </Text>
                 <Text>{item.compId.name}</Text>
                 <Text> Description :</Text>
@@ -96,8 +103,20 @@ const ViewProfile = () => {
           }
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
-export default ViewProfile;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+    accessToken: state.auth.accessToken,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewProfile);

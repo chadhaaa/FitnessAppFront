@@ -10,8 +10,9 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { connect } from "react-redux";
 
-const UpdateProfile = () => {
+const UpdateProfile = ({ ...props }) => {
   const [file, setFile] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -22,6 +23,8 @@ const UpdateProfile = () => {
   const [scholar, setScholar] = useState("");
 
   const [list, setList] = useState([]);
+
+  const { user } = props;
 
   const openImageLibrary = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -88,7 +91,9 @@ const UpdateProfile = () => {
 
     axios
       .put(
-        `http://192.168.1.197:8000/api/UpdateProfilePlayer/628591301cbedd1f6918329b`,
+        // `http://192.168.1.197:8000/api/UpdateProfilePlayer/628591301cbedd1f6918329b`,
+        `http://192.168.1.197:8000/api/UpdateProfilePlayer/${user._id}`,
+
         formdata,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -161,4 +166,16 @@ const UpdateProfile = () => {
   );
 };
 
-export default UpdateProfile;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+    accessToken: state.auth.accessToken,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile);

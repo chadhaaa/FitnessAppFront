@@ -13,7 +13,9 @@ import { CheckBox } from "react-native-elements";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const UpdatePlayer = () => {
+import { connect } from "react-redux";
+
+const UpdatePlayer = ({ ...props }) => {
   const [sessionPrice, setSessionPrice] = useState("");
   const [sessionNumbers, setSessionNumbers] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -37,6 +39,8 @@ const UpdatePlayer = () => {
   // Operations on Statistics
   const [stats, setStats] = useState([]);
   const [everyStat, setEveryStat] = useState([]);
+
+  const { user } = props;
 
   const chooseCom = (value) => {
     setComp(value);
@@ -65,7 +69,7 @@ const UpdatePlayer = () => {
     };
 
     axios.put(
-      `http://192.168.1.197:8000/api/playerUpdate/628591301cbedd1f6918329b`,
+      `http://192.168.1.197:8000/api/playerUpdate/${user._id}`,
       formdata
     );
   };
@@ -90,9 +94,7 @@ const UpdatePlayer = () => {
   useEffect(() => {
     if (loading3) {
       axios
-        .get(
-          `http://192.168.1.197:8000/api/statistics/628591301cbedd1f6918329b`
-        )
+        .get(`http://192.168.1.197:8000/api/statistics/${user._id}`)
         .then((response) => {
           const newArray1 = response.data.map((item) => {
             return { key: item._id, value: item.title };
@@ -107,7 +109,7 @@ const UpdatePlayer = () => {
   useEffect(() => {
     if (loading) {
       axios
-        .get(`http://localhost:8000/api/viewProfile/628591301cbedd1f6918329b`)
+        .get(`http://localhost:8000/api/viewProfile/${user._id}`)
         .then((res) => {
           console.log({ response: { ...res } });
           setSessionPrice(res.data.player.sessionPrice);
@@ -222,4 +224,16 @@ const UpdatePlayer = () => {
   );
 };
 
-export default UpdatePlayer;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    isLoggedIn: state.auth.isLoggedIn,
+    accessToken: state.auth.accessToken,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdatePlayer);
