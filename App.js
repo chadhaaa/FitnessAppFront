@@ -113,6 +113,8 @@ const App = () => {
             <Drawer.Screen name="Statistics" component={CrudStatistics} />
             <Drawer.Screen name="Competences" component={CrudCompetences} />
             <Drawer.Screen name="Invite Player" component={InvitePlayer} />
+            <Drawer.Screen name="View Profile" component={ViewProfile} />
+            <Drawer.Screen name="Update Profile" component={UpdateProfile} />
             <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen name="Session Program" component={CrudProgram} />
           </Drawer.Navigator>
