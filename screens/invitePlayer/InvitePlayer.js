@@ -39,7 +39,7 @@ const InvitePlayer = ({ navigation }) => {
       sessionNumbers: sessionNumbers,
     };
     axios
-      .post("http://192.168.1.197:8000/api/players", formdata)
+      .post("http://192.168.124.4:8000/api/players", formdata)
       .then((res) => {
         const response = res.data;
       });

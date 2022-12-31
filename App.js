@@ -10,6 +10,9 @@ import CrudCompetences from "./screens/CrudCompetences/CrudCompetences";
 import CrudDefis from "./screens/crudDefis/crudDefis";
 import CrudProgram from "./screens/CrudProgramSeance/crudProgramSeance";
 import InvitePlayer from "./screens/invitePlayer/InvitePlayer";
+import CrudEvents from "./screens/CrudEvent/crudEvent";
+import ViewProfile from "./screens/profilePlayer/ViewProfile";
+import UpdateProfile from "./screens/profilePlayer/UpdateProfile";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 

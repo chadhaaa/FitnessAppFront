@@ -40,7 +40,7 @@ const CrudEvents = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.197:8000/api/events", { headers })
+      .get("http://192.168.124.4:8000/api/events", { headers })
       .then((res) => {
         console.log(res);
         setEvent(res.data);
@@ -54,7 +54,7 @@ const CrudEvents = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.197:8000/api/event/" + item._id, {
+      .delete("http://192.168.124.4:8000/api/event/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -76,7 +76,7 @@ const CrudEvents = () => {
         visibility: visibility,
       };
       axios
-        .post("http://192.168.1.197:8000/api/event", formdata)
+        .post("http://192.168.124.4:8000/api/event", formdata)
         .then((res) => {
           const response = res.data;
           getEvents();
@@ -101,7 +101,7 @@ const CrudEvents = () => {
         visibility: visibility,
       };
       axios
-        .put("http://192.168.1.197:8000/api/event/" + hideId, formdata)
+        .put("http://192.168.124.4:8000/api/event/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getEvents();
@@ -129,8 +129,10 @@ const CrudEvents = () => {
   };
 
   const showMode = (currentMode) => {
-    setShow(true);
     setMode(currentMode);
+  };
+  const showPicker = () => {
+    setShow(true);
   };
 
   const handleVisibleModal = () => {
@@ -148,12 +150,16 @@ const CrudEvents = () => {
 
   const onChangeDateDebut = (event, selectedDate) => {
     const currentDate = selectedDate || dateDebut;
+    setShow(Platform.OS === "ios");
     setDateDebut(currentDate);
+    setShow(false);
   };
 
   const onChangeDateFin = (event, selectedDate) => {
     const currentDate = selectedDate || dateFin;
+    setShow(Platform.OS === "ios");
     setDateFin(currentDate);
+    setShow(false);
   };
 
   const onChangeHour = (value) => {
@@ -211,10 +217,14 @@ const CrudEvents = () => {
             </View>
 
             <Text style={styles.text}>Event start date </Text>
+
             <View style={styles.textButton}>
               <Button
                 title="Start date"
-                onPress={() => showMode("dateDebut")}
+                onPress={() => {
+                  showPicker();
+                  showMode("dateDebut");
+                }}
               />
             </View>
 
