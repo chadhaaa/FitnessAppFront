@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "FitnessApp", 
     "name": "FitnessAppFront",
     "slug": "FitnessAppFront",
     "version": "1.0.0",
