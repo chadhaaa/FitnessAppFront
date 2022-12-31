@@ -129,8 +129,10 @@ const CrudEvents = () => {
   };
 
   const showMode = (currentMode) => {
-    setShow(true);
     setMode(currentMode);
+  };
+  const showPicker = () => {
+    setShow(true);
   };
 
   const handleVisibleModal = () => {
@@ -148,12 +150,16 @@ const CrudEvents = () => {
 
   const onChangeDateDebut = (event, selectedDate) => {
     const currentDate = selectedDate || dateDebut;
+    setShow(Platform.OS === "ios");
     setDateDebut(currentDate);
+    setShow(false);
   };
 
   const onChangeDateFin = (event, selectedDate) => {
     const currentDate = selectedDate || dateFin;
+    setShow(Platform.OS === "ios");
     setDateFin(currentDate);
+    setShow(false);
   };
 
   const onChangeHour = (value) => {
@@ -211,10 +217,14 @@ const CrudEvents = () => {
             </View>
 
             <Text style={styles.text}>Event start date </Text>
+
             <View style={styles.textButton}>
               <Button
                 title="Start date"
-                onPress={() => showMode("dateDebut")}
+                onPress={() => {
+                  showPicker();
+                  showMode("dateDebut");
+                }}
               />
             </View>
 
