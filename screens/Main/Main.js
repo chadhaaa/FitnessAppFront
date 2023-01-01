@@ -10,6 +10,8 @@ import Home from "../home/Home";
 import CrudPlaces from "../CrudPlaces/CrudPlaces";
 import PlayerProfile from "../PlayerProfile/playerProfile";
 import SessionCancel from "../SessionCancel/sessionCancel";
+import SessionFeedback from "../SessionFeedback/sessionFeedback";
+
 import Payment from "../Payment/Payment";
 import { useEffect } from "react";
 
@@ -30,10 +32,10 @@ const Main = () => {
             <Drawer.Screen name="Invite Player" component={InvitePlayer} />
             <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen name="Session Program" component={CrudProgram} />
-
             <Drawer.Screen name="Places" component={CrudPlaces} />
             <Drawer.Screen name="Profile" component={PlayerProfile} />
             <Drawer.Screen name="Session Cancel" component={SessionCancel} />
+            <Drawer.Screen name="Session Feedback" component={SessionFeedback} />
             <Drawer.Screen name="Payment" component={Payment} />
 
 

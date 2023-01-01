@@ -29,7 +29,7 @@ import {
         Accept: "application/json",
       };
       const response = await axios
-        .get("http://192.168.108.64:8000/api/getProfileByCoach/5e9f9b9f9b9f9b9f9b9f9e11", { headers })
+        .get("http://192.168.1.5:8000/api/getProfileByCoach/5e9f9b9f9b9f9b9f9b9f9e11", { headers })
         .then((res) => {
             
             setProfile(res.data.player)

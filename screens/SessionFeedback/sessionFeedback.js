@@ -14,54 +14,47 @@ import {
   import axios from "axios";
   import { Rating } from "react-native-ratings";
   
-  const SessionCancel = () => {
+  const SessionFeedback = () => {
     
     const { id , setId} = useState()
-    const [reason, setReason] = useState()
+    const [feedback, setFeedback] = useState()
 
-    useEffect(() => {
-      setReason("");
-    }, []);
 
-    const cancelSession = () => {
+
+    const feedbackSession = () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
       };
       const formdata = {
-        cancellation: true,
-        reason: reason,
+        feedback: feedback,
+        
       };
       axios
         .put("http://192.168.1.5:8000/api/sessionCancel/6282bc1aa7beeceeb106a67c/", formdata)
         .then(() => {
-          setReason("");
+          setFeedback("");
         })
         .catch((error) => console.log(error));
     
     };
 
-    const onChangeReason = (value) => {
-      setReason(value);
+    const onChangeFeedback = (value) => {
+      setFeedback(value);
     };
     
     return (
       <SafeAreaView>
         <ScrollView>
-        <View style={styles.header_container}>
-            <Text style={styles.Text}>Cancel Session</Text>
-        </View>
         <View>
-
-
         <TextInput
-              value={reason}
+              value={feedback}
               style={styles.text_input}
               placeholder=""
-              onChangeText={onChangeReason}
+              onChangeText={onChangeFeedback}
         />
-        <TouchableOpacity onPress={() => cancelSession()}>
-                  <Text style={styles.txt_edit}> Cancel </Text>
+        <TouchableOpacity onPress={() => feedbackSession()}>
+                  <Text style={styles.txt_edit}> Submit </Text>
         </TouchableOpacity>
         </View>
         </ScrollView>
@@ -69,7 +62,7 @@ import {
     );
   };
   
-  export default SessionCancel;
+  export default SessionFeedback;
   
   const styles = StyleSheet.create({
     header_container: {
