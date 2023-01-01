@@ -13,6 +13,7 @@ import {
   } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
 	const [email, setEmail] = useState('')
@@ -28,21 +29,29 @@ const Login = ({navigation}) => {
     navigation.navigate('Signup')
   }
 	async function loginUser(event) {
+    AsyncStorage.clear()
+
 		const body = {
 			email: email,
 			password: password,
 		}
 		await axios
-			.post('http://10.1.0.130:8000/api/login', body)
+			.post('http://192.168.64.243:8000/api/login', body)
 			.then((response) => {
+
+        
 				if (response.data.user && !response.data.user._doc.new) {
-					console.log(response.data.user._doc.new)
-					alert(response.data.user)
+          AsyncStorage.setItem('user_id', response.data.user._doc._id);
+          AsyncStorage.setItem('user_plan', response.data.user._doc.plan);
+
+          console.log('Id Saved');
+         
           alert(`Hello ${response.data.user._doc.firstName} ${response.data.user._doc.lastName}`)
           navigation.reset({
             index: 0,
             routes: [{ name: 'Main' }],
           })
+          
 					
 				}
         else if (response.data.user && response.data.user._doc.new) {
@@ -51,7 +60,7 @@ const Login = ({navigation}) => {
 
 			})
 			.catch((err) => {
-        alert('1')
+        alert('wrong credentials')
 				//alert(err.response.data.message)
 			})
 

@@ -29,7 +29,7 @@ import {
             new : false,
         }
         console.log(route.params.id)
-        axios.put('http://10.1.0.130:8000/api/coachUpdate/'+route.params.id, formdata)
+        axios.put('http://192.168.64.243:8000/api/coachUpdate/'+route.params.id, formdata)
      
     };
   

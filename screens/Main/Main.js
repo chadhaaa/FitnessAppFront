@@ -10,6 +10,9 @@ import Home from "../home/Home";
 import CrudPlaces from "../CrudPlaces/CrudPlaces";
 import PlayerProfile from "../PlayerProfile/playerProfile";
 import SessionCancel from "../SessionCancel/sessionCancel";
+import Payment from "../Payment/Payment";
+import { useEffect } from "react";
+
 
 
 
@@ -17,6 +20,7 @@ import SessionCancel from "../SessionCancel/sessionCancel";
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator()
 const Main = () => {
+ 
   return (
     <NavigationContainer independent={true}>
         <Drawer.Navigator initialRouteName="Home">
@@ -30,6 +34,8 @@ const Main = () => {
             <Drawer.Screen name="Places" component={CrudPlaces} />
             <Drawer.Screen name="Profile" component={PlayerProfile} />
             <Drawer.Screen name="Session Cancel" component={SessionCancel} />
+            <Drawer.Screen name="Payment" component={Payment} />
+
 
         </Drawer.Navigator> 
     </NavigationContainer>
