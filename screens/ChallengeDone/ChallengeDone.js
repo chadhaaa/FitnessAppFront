@@ -1,4 +1,5 @@
 import {
+  Button,
     View,
     Text,
     SafeAreaView,
@@ -14,62 +15,71 @@ import {
   import axios from "axios";
   import { Rating } from "react-native-ratings";
   
-  const SessionCancel = () => {
-    
-    const { id , setId} = useState()
-    const [reason, setReason] = useState()
+  const Challenges = () => {
+    const [challenge, setChallenge] = useState([]);
+    const [link, setLink] = useState();
+    const [goal, setGoal] = useState();
+    const [done, setDone] = useState();
 
     useEffect(() => {
-      setReason("");
+      getChallenges();
     }, []);
-
-    const cancelSession = () => {
+    const getChallenges = async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
       };
-      const formdata = {
-        cancellation: true,
-        reason: reason,
-      };
-      axios
-        .put("http://10.1.0.130:8000/api/sessionCancel/6282bc1aa7beeceeb106a67c/", formdata)
-        .then(() => {
-          setReason("");
+      const response = await axios
+        .get("http://10.1.0.130:8000/api/challenges", { headers })
+        .then((res) => {
+          console.log(res);
+          setChallenge(res.data);
+          console.log(res.data);
         })
         .catch((error) => console.log(error));
-    
+    };
+    const handleDone = (item) => {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      };
+      console.log(item)
+      const formData = {
+        done: true,
+      }
+      const response = axios
+        .put("http://10.1.0.130:8000/api/challenge/" + item._id, formData)
+        .then((res) => {
+          var respo = res.data;
+          getChallenges();
+        })
+        .catch((error) => console.log(error));
     };
 
-    const onChangeReason = (value) => {
-      setReason(value);
-    };
-    
     return (
       <SafeAreaView>
         <ScrollView>
-        <View style={styles.header_container}>
-            <Text style={styles.Text}>Cancel Session</Text>
-        </View>
-        <View>
-
-
-        <TextInput
-              value={reason}
-              style={styles.text_input}
-              placeholder=""
-              onChangeText={onChangeReason}
-        />
-        <TouchableOpacity onPress={() => cancelSession()}>
-                  <Text style={styles.txt_edit}> Cancel </Text>
-        </TouchableOpacity>
-        </View>
+          {challenge.map((item, index) => {
+            return (
+              <View style={styles.item_course} key={index}>
+                <View>
+                  <Text style={styles.txt_name}> {item.goal}</Text>
+  
+                  <Text style={styles.txt_item}> {item.link}</Text>
+                </View>
+                <View>
+                  <Button disabled={item.done}  onPress={() => handleDone(item)} title='done'>
+                  </Button>
+                </View>
+              </View>
+            );
+          })}
         </ScrollView>
       </SafeAreaView>
     );
   };
   
-  export default SessionCancel;
+  export default Challenges;
   
   const styles = StyleSheet.create({
     header_container: {

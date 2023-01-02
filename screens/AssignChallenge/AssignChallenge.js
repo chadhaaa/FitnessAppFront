@@ -28,10 +28,10 @@ const AssignChallenge = ({navigation}) => {
           Accept: "application/json",
         };
         const formData = {
-          idPlayers : idPlayer,
+          idPlayers : idPlayer
         }
         axios
-          .put("http://192.168.1.5:8000/api/assignChallengePlayer/6292ac340749749d7633a7f0/", formData)
+          .put("http://10.1.0.130:8000/api/assignChallengePlayer/6284f71ca643ce8c8daaacab/", formData)
          
             alert('challenge assigned to player')
        

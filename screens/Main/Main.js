@@ -12,6 +12,8 @@ import PlayerProfile from "../PlayerProfile/playerProfile";
 import SessionCancel from "../SessionCancel/sessionCancel";
 import SessionFeedback from "../SessionFeedback/sessionFeedback";
 import AssignChallenge from "../AssignChallenge/AssignChallenge";
+import Challenges from "../ChallengeDone/ChallengeDone";
+
 
 
 import Payment from "../Payment/Payment";
@@ -39,7 +41,7 @@ const Main = () => {
             <Drawer.Screen name="Session Cancel" component={SessionCancel} />
             <Drawer.Screen name="Session Feedback" component={SessionFeedback} />
             <Drawer.Screen name="Assign Challenge" component={AssignChallenge} />
-
+            <Drawer.Screen name="Challenge Done" component={Challenges} />
             <Drawer.Screen name="Payment" component={Payment} />
 
 

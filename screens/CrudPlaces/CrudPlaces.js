@@ -37,7 +37,7 @@ const CrudPlaces = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.5:8000/api/places", { headers })
+      .get("http://10.1.0.130:8000/api/places", { headers })
       .then((res) => {
         console.log(res);
         setPlace(res.data);
@@ -51,7 +51,7 @@ const CrudPlaces = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.5:8000/api/place/" + item._id, {
+      .delete("http://10.1.0.130:8000/api/place/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -70,7 +70,7 @@ const CrudPlaces = () => {
         address: address,
       };
       axios
-        .post("http://192.168.1.5:8000/api/place", formdata)
+        .post("http://10.1.0.130:8000/api/place", formdata)
         .then((res) => {
           const response = res.data;
           getPlaces();
@@ -89,7 +89,7 @@ const CrudPlaces = () => {
         address: address,
       };
       axios
-        .put("http://192.168.1.5:8000/api/place/" + hideId, formdata)
+        .put("http://10.1.0.130:8000/api/place/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getPlaces();

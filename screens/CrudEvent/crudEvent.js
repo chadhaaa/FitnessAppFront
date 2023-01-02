@@ -45,7 +45,7 @@ const CrudEvents = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.5:8000/api/events", { headers })
+      .get("http://10.1.0.130:8000/api/events", { headers })
       .then((res) => {
         console.log(res);
         setEvent(res.data);
@@ -59,7 +59,7 @@ const CrudEvents = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.5:8000/api/event/" + item._id, {
+      .delete("http://10.1.0.130:8000/api/event/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -81,7 +81,7 @@ const CrudEvents = () => {
         visibility: visibility,
       };
       axios
-        .post("http://192.168.1.5:8000/api/event", formdata)
+        .post("http://10.1.0.130:8000/api/event", formdata)
         .then((res) => {
           const response = res.data;
           getEvents();
@@ -106,7 +106,7 @@ const CrudEvents = () => {
         visibility: visibility,
       };
       axios
-        .put("http://192.168.1.5:8000/api/event/" + hideId, formdata)
+        .put("http://10.1.0.130:8000/api/event/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getEvents();

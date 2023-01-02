@@ -31,7 +31,7 @@ import {
         
       };
       axios
-        .put("http://192.168.1.5:8000/api/sessionCancel/6282bc1aa7beeceeb106a67c/", formdata)
+        .put("http://10.1.0.130:8000/api/sessionCancel/6282bc1aa7beeceeb106a67c/", formdata)
         .then(() => {
           setFeedback("");
         })

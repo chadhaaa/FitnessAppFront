@@ -38,7 +38,7 @@ const Payment = () =>{
         const formdata = {
 			    plan : planChoosed,
         }
-        axios.put('http://192.168.1.5:8000/api/coachUpdate/'+id, formdata).then(
+        axios.put('http://10.1.0.130:8000/api/coachUpdate/'+id, formdata).then(
           alert('Payment done'),
           AsyncStorage.setItem('user_plan', planChoosed)
 

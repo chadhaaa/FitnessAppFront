@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
 			password: password,
 		}
 		await axios
-			.post('http://192.168.1.5:8000/api/login', body)
+			.post('http://10.1.0.130:8000/api/login', body)
 			.then((response) => {
 
         

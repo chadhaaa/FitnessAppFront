@@ -33,7 +33,7 @@ const CrudCompetences = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.5:8000/api/competences", { headers })
+      .get("http://10.1.0.130:8000/api/competences", { headers })
       .then((res) => {
         console.log(res);
         setComp(res.data);
@@ -47,7 +47,7 @@ const CrudCompetences = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.5:8000/api/competence/" + item._id, {
+      .delete("http://10.1.0.130:8000/api/competence/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -67,7 +67,7 @@ const CrudCompetences = () => {
         visibility: visibility,
       };
       axios
-        .post("http://192.168.1.5:8000/api/competence", formdata)
+        .post("http://10.1.0.130:8000/api/competence", formdata)
         .then((res) => {
           const response = res.data;
           getComps();
@@ -88,7 +88,7 @@ const CrudCompetences = () => {
         visibility: visibility,
       };
       axios
-        .put("http://192.168.1.5:8000/api/competence/" + hideId, formdata)
+        .put("http://10.1.0.130:8000/api/competence/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getComps();

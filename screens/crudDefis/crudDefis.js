@@ -29,7 +29,7 @@ const CrudDefis = () => {
       Accept: "application/json",
     };
     const response = await axios
-      .get("http://192.168.1.5:8000/api/challenges", { headers })
+      .get("http://10.1.0.130:8000/api/challenges", { headers })
       .then((res) => {
         console.log(res);
         setDefi(res.data);
@@ -43,7 +43,7 @@ const CrudDefis = () => {
       Accept: "application/json",
     };
     const response = axios
-      .delete("http://192.168.1.5:8000/api/challenge/" + item._id, {
+      .delete("http://10.1.0.130:8000/api/challenge/" + item._id, {
         headers,
       })
       .then((res) => {
@@ -61,7 +61,7 @@ const CrudDefis = () => {
         done: done,
       };
       axios
-        .post("http://192.168.1.5:8000/api/challenge", formdata)
+        .post("http://10.1.0.130:8000/api/challenge", formdata)
         .then((res) => {
           const response = res.data;
           getDefis();
@@ -78,7 +78,7 @@ const CrudDefis = () => {
         done: done,
       };
       axios
-        .put("http://192.168.1.5:8000/api/challenge/" + hideId, formdata)
+        .put("http://10.1.0.130:8000/api/challenge/" + hideId, formdata)
         .then((res) => {
           const response = res.data;
           getDefis();
