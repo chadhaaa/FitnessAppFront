@@ -211,7 +211,7 @@ const CrudCompetences = () => {
                 <Text style={styles.txt_item}> {item?.description}</Text>
 
                 <Text style={styles.txt_item}> {item.link}</Text>
-                <Text style={styles.txt_item}>
+                {/* <Text style={styles.txt_item}>
                   <Rating
                     startingValue={item?.stars}
                     type="custom"
@@ -221,7 +221,7 @@ const CrudCompetences = () => {
                     readonly={true}
                     style={{ paddingVertical: 10 }}
                   />
-                </Text>
+                </Text> */}
                 <Text style={styles.txt_item}>{String(item?.visibility)}</Text>
               </View>
               <View>

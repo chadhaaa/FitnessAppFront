@@ -133,38 +133,68 @@ const UpdateSession = ({ route, navigation }) => {
   return (
     <ScrollView>
       <View>
-        <Text>Update Player Infos</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 25, textAlign: "center" }}>
+          Update Session{" "}
+        </Text>
         <TextInput
           value={cancellation}
           placeholder="Cancellation"
           onChangeText={(cancellation) => setCancellation(cancellation)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={reason}
           placeholder="Reason"
           onChangeText={(reason) => setReason(reason)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
 
         <TextInput
           value={feedback}
           placeholder="Feedback"
           onChangeText={(feedback) => setFeedback(feedback)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
 
         <TextInput
           value={hour}
           placeholder="Hour"
           onChangeText={(hour) => setHour(hour)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
 
-        <Text>Choose Competence :</Text>
+        <Text style={{ fontSize: 18 }}>Choose Competence :</Text>
         <MultipleSelectList
           setSelected={chooseCom}
           data={everyComp}
           save="key"
           label="Competences"
         />
-        <Text>Choose Statistic :</Text>
+        <Text style={{ fontSize: 18 }}>Choose Statistic :</Text>
         <MultipleSelectList
           setSelected={chooseStat}
           data={everyStat}
@@ -186,7 +216,7 @@ const UpdateSession = ({ route, navigation }) => {
         <Button title="Update Session" onPress={updateSession} />
         <Button
           title="Back to List"
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("List of Sessions (coach)")}
         />
       </View>
     </ScrollView>

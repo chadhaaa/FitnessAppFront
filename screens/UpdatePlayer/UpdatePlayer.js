@@ -143,74 +143,138 @@ const UpdatePlayer = ({ ...props }) => {
   return (
     <ScrollView>
       <View>
-        <Text>Update Player Infos</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 25, textAlign: "center" }}>
+          Update Player Infos
+        </Text>
         <TextInput
           value={firstname}
           placeholder="Firstname"
           onChangeText={(firstname) => setFirstname(firstname)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={lastname}
           placeholder="Lastname"
           onChangeText={(lastname) => setLastname(lastname)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
-        {/* <TextInput
-          value={email}
-          placeholder="Email"
-          onChangeText={(email) => setEmail(email)}
-        /> */}
         <TextInput
           value={tel}
           placeholder="Telephone Number"
           onChangeText={(tel) => setTel(tel)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={height}
           placeholder="Height"
           onChangeText={(height) => setHeight(height)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={weight}
           placeholder="Weight"
           onChangeText={(weight) => setWeight(weight)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={scholar}
           placeholder="Scholar"
           onChangeText={(scholar) => setScholar(scholar)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={country}
           placeholder="Country"
           onChangeText={(country) => setCountry(country)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={sessionNumbers}
           placeholder="Number of Sessions"
           onChangeText={(sessionNumbers) => setSessionNumbers(sessionNumbers)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <TextInput
           value={sessionPrice}
           placeholder="Price of Session"
           onChangeText={(sessionPrice) => setSessionPrice(sessionPrice)}
+          style={{
+            fontSize: 18,
+            borderWidth: 1,
+            borderColor: "#ddd",
+            padding: 8,
+            margin: 8,
+          }}
         />
         <View>
-          <Text>Is this player active ?</Text>
-          <Switch
-            value={active}
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
-            thumbColor={active ? "#f5dd4b" : "#f4f3f4"}
-            onValueChange={changeActivityPlayer}
-          />
+          <Text style={{ fontSize: 18 }}>Is this player active ?</Text>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <Switch
+              value={active}
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={active ? "#f5dd4b" : "#f4f3f4"}
+              onValueChange={changeActivityPlayer}
+            />
+          </View>
         </View>
-        <Text>Choose Competence :</Text>
+        <Text style={{ fontSize: 18 }}>Choose Competence :</Text>
         <MultipleSelectList
           setSelected={chooseCom}
           data={everyComp}
           save="key"
           label="Categories"
         />
-        <Text>Choose Statistic :</Text>
+        <Text style={{ fontSize: 18 }}>Choose Statistic :</Text>
         <MultipleSelectList
           setSelected={chooseStat}
           data={everyStat}
@@ -218,7 +282,7 @@ const UpdatePlayer = ({ ...props }) => {
           label="Categories"
         />
 
-        <Button title="UpdatePlayer" onPress={updateProfile} />
+        <Button title="Update Player" onPress={updateProfile} />
       </View>
     </ScrollView>
   );

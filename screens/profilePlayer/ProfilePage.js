@@ -16,29 +16,32 @@ const ProfilePage = ({
 }) => {
   return (
     <View>
-      <Text>My profile</Text>
-      <Text> My picture</Text>
+      <Text style={{ fontSize: 40 }}>My profile</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 23 }}> My picture</Text>
       <Image
         // source={`http://192.168.1.197:8000/${picture}`}
         source={{ uri: picture }}
         style={{ width: 200, height: 200, borderRadius: 400 / 2 }}
       />
       <View>
-        <Text> FirstName</Text>
-        <Text> {firstname}</Text>
-        <Text> LastName</Text>
-        <Text> {lastname}</Text>
-        <Text> Email</Text>
-        <Text> {email}</Text>
-        <Text> Weight</Text>
-        <Text> {weight}</Text>
-        <Text> Height</Text>
-        <Text> {height}</Text>
-        <Text> Goal</Text>
-        <Text> {goal}</Text>
-        <Text> Telephone Number</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> FirstName</Text>
+        <Text style={{ fontSize: 15 }}> {firstname}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> LastName</Text>
+        <Text style={{ fontSize: 15 }}> {lastname}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> Email</Text>
+        <Text style={{ fontSize: 15 }}> {email}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> Weight</Text>
+        <Text style={{ fontSize: 15 }}> {weight}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> Height</Text>
+        <Text style={{ fontSize: 15 }}> {height}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}> Goal</Text>
+        <Text style={{ fontSize: 15 }}> {goal}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+          {" "}
+          Telephone Number
+        </Text>
         <Text> {tel}</Text>
-        <Text>Scholar </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Scholar </Text>
         <Text> {scholar}</Text>
       </View>
     </View>

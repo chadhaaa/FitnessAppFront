@@ -5,23 +5,24 @@ import musculation from "../../assets/musculation.png";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../../redux/actions/authActions";
 
 const Home = ({ ...props }) => {
   const { user, navigation } = props;
   const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     console.log("props", props);
   }, [isFocused]);
 
   return (
     <View>
-      <Text>
+      <Text style={{ fontWeight: "bold", fontSize: 30 }}>
         {" "}
         Hello {user.firstname} {user.lastname}
       </Text>
-      <Text> {user._id}</Text>
-      <Text> {user.token}</Text>
-      <Button title="logout" onPress={() => navigation.navigate("Login")} />
 
       <Card style={Styles.container}>
         <Card.Content>
@@ -36,6 +37,7 @@ const Home = ({ ...props }) => {
           <Paragraph>Explore the App ! </Paragraph>
         </Card.Content>
       </Card>
+      <Button title="Log out" onPress={() => navigation.navigate("Login")} />
     </View>
   );
 };

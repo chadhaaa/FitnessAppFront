@@ -24,7 +24,9 @@ const GetAllSessions = ({ navigation }) => {
   return (
     <ScrollView>
       <View>
-        <Text>Sessions List : </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+          Sessions List :{" "}
+        </Text>
         {sessions.map(function (session) {
           return (
             <View key={session._id}>

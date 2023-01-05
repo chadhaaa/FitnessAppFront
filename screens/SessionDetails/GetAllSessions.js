@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Button } from "react-native";
+import { View, Text, ScrollView, Button, FlatList } from "react-native";
 import React from "react";
 import axios from "axios";
 import Seance from "./SessionDetails";
@@ -7,11 +7,13 @@ import { useIsFocused } from "@react-navigation/native";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const GetSeance = ({ navigation }) => {
   const [sessions, setSession] = useState([]);
   const isFocused = useIsFocused();
   const [data, setData] = useState(sessions);
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
     getSessions();
@@ -33,17 +35,19 @@ const GetSeance = ({ navigation }) => {
     <ScrollView>
       <View>
         <View>
-          <CalendarPicker
+          {/* <CalendarPicker
             onDateChange={onDateNowChange}
             // allowRangeSelection={true}
-          />
+          /> */}
           <DatePicker mode="datepicker" onDateChange={onDateNowChange} />
-          <Button title="Filter" onPress={onDateNowChange} />
+          {/* <Button title="Filter" onPress={onDateNowChange} /> */}
         </View>
         {/* <View>
           <Calendar singleSelectMode onChange={onDateNowChange} />
         </View> */}
-        <Text>Sessions List : </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+          Sessions List :{" "}
+        </Text>
         {sessions.map(function (session) {
           return (
             <View key={session._id}>

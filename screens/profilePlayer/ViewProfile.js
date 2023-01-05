@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, RefreshControl } from "react-native";
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -9,6 +9,8 @@ const ViewProfile = ({ ...props }) => {
   const [profile, setProfile] = useState([]);
   const [stat, setStat] = useState([]);
   const [Comp, setComp] = useState([]);
+
+  const [refreshing, setRefreshing] = useState(false);
 
   const { user } = props;
   useEffect(() => {
@@ -29,12 +31,21 @@ const ViewProfile = ({ ...props }) => {
   console.log("stat", stat);
   console.log("comp", Comp);
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    getProfile();
+    setRefreshing(false);
+  };
+
   useEffect(() => {
     getProfile();
   }, []);
   return (
-    <ScrollView>
-      <Text>viewProfile</Text>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <ProfilePage
         firstname={profile.firstname}
         lastname={profile.lastname}
@@ -47,32 +58,61 @@ const ViewProfile = ({ ...props }) => {
         scholar={profile.scholar}
       />
       <View>
-        <Text>My statistics</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+          My statistics
+        </Text>
         {stat.map((item, index) => {
           if (item.statId.visibility) {
             return (
               <View key={item.statId._id}>
-                <Text> Title :</Text>
-                <Text> {item.statId.title} </Text>
-                <Text> Link :</Text>
-                <Text> {item.statId.link} </Text>
-                <Text> Description :</Text>
-                <Text> {item.statId.description} </Text>
-                <Text> Current State :</Text>
-                <Text> {item.statId.currentState} </Text>
-                <Text> Unit : </Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Title :
+                </Text>
+                <Text style={{ fontSize: 15 }}> {item.statId.title} </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Link :
+                </Text>
+                <Text style={{ fontSize: 15 }}> {item.statId.link} </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Description :
+                </Text>
+                <Text style={{ fontSize: 15 }}>
+                  {" "}
+                  {item.statId.description}{" "}
+                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Current State :
+                </Text>
+                <Text style={{ fontSize: 15 }}>
+                  {" "}
+                  {item.statId.currentState}{" "}
+                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Unit :{" "}
+                </Text>
+                <Text style={{ fontSize: 15 }}>
                   {(item.statId.unit[0] && item?.statId.unit[0].value) ||
                     item.statId.unit[0]}{" "}
                 </Text>
-                <Text> Type :</Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Type :
+                </Text>
+                <Text style={{ fontSize: 15 }}>
                   {" "}
                   {(item.statId.type[0] && item.statId.type[0].value) ||
                     item.statId.type[0]}
                 </Text>
-                <Text> Min or Max ? </Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Min or Max ?{" "}
+                </Text>
+                <Text style={{ fontSize: 15 }}>
                   {" "}
                   {(item.statId.minMax[0] && item.statId.minMax[0].value) ||
                     item.statId.minMax[0]}
@@ -80,26 +120,49 @@ const ViewProfile = ({ ...props }) => {
               </View>
             );
           } else {
-            return <Text> There are no statistics to show !!</Text>;
+            return (
+              <Text style={{ fontWeight: "bold", color: "red" }}>
+                {" "}
+                There are no statistics to show !!
+              </Text>
+            );
           }
         })}
       </View>
       <View>
-        <Text>My competences</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+          My competences
+        </Text>
         {Comp.map((item, index) => {
           if (item.compId.visibility) {
             return (
               <View key={item.compId._id}>
-                <Text>Name : </Text>
-                <Text>{item.compId.name}</Text>
-                <Text> Description :</Text>
-                <Text> {item.compId.description} </Text>
-                <Text> Link :</Text>
-                <Text> {item.compId.link} </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Name :{" "}
+                </Text>
+                <Text style={{ fontSize: 15 }}>{item.compId.name}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Description :
+                </Text>
+                <Text style={{ fontSize: 15 }}>
+                  {" "}
+                  {item.compId.description}{" "}
+                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Link :
+                </Text>
+                <Text style={{ fontSize: 15 }}> {item.compId.link} </Text>
               </View>
             );
           } else {
-            return <Text> There are no competences to show !! </Text>;
+            return (
+              <Text style={{ fontWeight: "bold", color: "red" }}>
+                {" "}
+                There are no competences to show !!{" "}
+              </Text>
+            );
           }
         })}
       </View>

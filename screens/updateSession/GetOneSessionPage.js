@@ -5,17 +5,19 @@ const OneSeance = ({ day, cancellation, reason, feedback, hour }) => {
   return (
     <ScrollView>
       <View>
-        <Text>Session Details</Text>
-        <Text>Date : </Text>
-        <Text>{day}</Text>
-        <Text>Hour : </Text>
-        <Text>{hour}</Text>
-        <Text>Cancellation : </Text>
-        <Text>{cancellation}</Text>
-        <Text>Reason : </Text>
-        <Text>{reason}</Text>
-        <Text>Feedback : </Text>
-        <Text>{feedback}</Text>
+        <Text style={{ fontSize: 40 }}>Session Details</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Date : </Text>
+        <Text style={{ fontSize: 18 }}>{day}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Hour : </Text>
+        <Text style={{ fontSize: 18 }}>{hour}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+          Cancellation :{" "}
+        </Text>
+        <Text style={{ fontSize: 18 }}>{cancellation}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Reason : </Text>
+        <Text style={{ fontSize: 18 }}>{reason}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Feedback : </Text>
+        <Text style={{ fontSize: 18 }}>{feedback}</Text>
       </View>
     </ScrollView>
   );

@@ -18,12 +18,12 @@ const Seance = ({
   return (
     <ScrollView>
       <View>
-        <Text>Day</Text>
-        <Text>{day}</Text>
-        <Text>Hour</Text>
-        <Text>{hour}</Text>
-        <Text>Feedback</Text>
-        <Text>{feedback}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Day</Text>
+        <Text style={{ fontSize: 18 }}>{day}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Hour</Text>
+        <Text style={{ fontSize: 18 }}>{hour}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 23 }}>Feedback</Text>
+        <Text style={{ fontSize: 18 }}>{feedback}</Text>
         <Button
           title="Show Details"
           onPress={() =>

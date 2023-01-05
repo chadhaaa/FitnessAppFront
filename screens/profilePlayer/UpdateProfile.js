@@ -11,6 +11,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { connect } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const UpdateProfile = ({ ...props }) => {
   const [file, setFile] = useState("");
@@ -25,6 +26,8 @@ const UpdateProfile = ({ ...props }) => {
   const [list, setList] = useState([]);
 
   const { user } = props;
+
+  const navigation = useNavigation();
 
   const openImageLibrary = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -114,52 +117,101 @@ const UpdateProfile = ({ ...props }) => {
 
   return (
     <View>
-      <Text>Update Your Profile</Text>
-      <TextInput
-        value={firstname}
-        placeholder="Firstname"
-        onChangeText={onChangeFirstname}
-      />
-      <TextInput
-        value={lastname}
-        placeholder="Lastname"
-        onChangeText={onChangeLastname}
-      />
-      <TextInput
-        value={height}
-        placeholder="Height"
-        onChangeText={onChangeHeight}
-      />
-      <TextInput
-        value={weight}
-        placeholder="Weight"
-        onChangeText={onChangeWeight}
-      />
-      <TextInput
-        value={tel}
-        placeholder="Telephone Number"
-        onChangeText={onChangeTel}
-      />
-      <TextInput
-        value={scholar}
-        placeholder="Scholar"
-        onChangeText={onChangeScholar}
-      />
+      <Text style={{ fontWeight: "bold", fontSize: 25, textAlign: "center" }}>
+        Update Your Profile
+      </Text>
       <View>
         <TouchableOpacity onPress={openImageLibrary}>
           {file ? (
             <Image
               source={{ uri: file }}
-              style={{ width: 200, height: 200, borderRadius: 400 / 2 }}
+              style={{ width: 250, height: 250, borderRadius: 400 / 2 }}
             />
           ) : (
-            <Text>Update Profile Image</Text>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              Click Here To Update Profile Image
+            </Text>
           )}
         </TouchableOpacity>
-        {/* <Text>Skip</Text>
-        {file ? <Text onPress={updateProfile}> Upload</Text> : null} */}
       </View>
+      <TextInput
+        value={firstname}
+        placeholder="Firstname"
+        onChangeText={onChangeFirstname}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+      <TextInput
+        value={lastname}
+        placeholder="Lastname"
+        onChangeText={onChangeLastname}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+      <TextInput
+        value={height}
+        placeholder="Height"
+        onChangeText={onChangeHeight}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+      <TextInput
+        value={weight}
+        placeholder="Weight"
+        onChangeText={onChangeWeight}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+      <TextInput
+        value={tel}
+        placeholder="Telephone Number"
+        onChangeText={onChangeTel}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+      <TextInput
+        value={scholar}
+        placeholder="Scholar"
+        onChangeText={onChangeScholar}
+        style={{
+          fontSize: 18,
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          margin: 8,
+        }}
+      />
+
       <Button onPress={updateProfile} title="Update" />
+      <Button
+        onPress={() => navigation.navigate("View Profile")}
+        title="Back to Profile"
+      />
     </View>
   );
 };

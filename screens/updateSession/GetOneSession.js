@@ -54,36 +54,69 @@ const GetSessionDetail = ({ route, navigation }) => {
           hour={session && session.hour}
         />
         <View>
-          <Text>Place of Session</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+            Place of Session
+          </Text>
           {place && place?.length === 0 ? (
-            <Text> No data found !</Text>
+            <Text style={{ fontWeight: "bold", color: "red" }}>
+              {" "}
+              No data found !
+            </Text>
           ) : (
             <View>
-              <Text> Title : </Text>
-              <Text> {place && place.Name}</Text>
-              <Text> Country State : </Text>
-              <Text> {place && place.countryState}</Text>
-              <Text> Country : </Text>
-              <Text> {place && place.country}</Text>
-              <Text> Address : </Text>
-              <Text> {place && place.address}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                {" "}
+                Title :{" "}
+              </Text>
+              <Text style={{ fontSize: 18 }}> {place && place.Name}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                {" "}
+                Country State :{" "}
+              </Text>
+              <Text style={{ fontSize: 18 }}>
+                {" "}
+                {place && place.countryState}
+              </Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                {" "}
+                Country :{" "}
+              </Text>
+              <Text style={{ fontSize: 18 }}> {place && place.country}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                {" "}
+                Address :{" "}
+              </Text>
+              <Text style={{ fontSize: 18 }}> {place && place.address}</Text>
             </View>
           )}
         </View>
         <View>
-          <Text> Competences : </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+            {" "}
+            Competences :{" "}
+          </Text>
           {comp && comp?.length === 0 ? (
-            <Text> No data found !</Text>
+            <Text style={{ fontWeight: "bold", color: "red" }}>
+              {" "}
+              No data found !
+            </Text>
           ) : (
             comp.map((item, index) => (
               <View key={index}>
-                <Text>Title :</Text>
-                <Text>{item.compId.name}</Text>
-                <Text>Description :</Text>
-                <Text>{item.compId.description}</Text>
-                <Text>Link :</Text>
-                <Text>{item.compId.link}</Text>
-                <Text> Star Rating :</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Title :
+                </Text>
+                <Text style={{ fontSize: 18 }}>{item.compId.name}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Description :
+                </Text>
+                <Text style={{ fontSize: 18 }}>{item.compId.description}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>Link :</Text>
+                <Text style={{ fontSize: 18 }}>{item.compId.link}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  {" "}
+                  Star Rating :
+                </Text>
                 <Rating
                   startingValue={item.compId.stars}
                   type="custom"
@@ -98,51 +131,76 @@ const GetSessionDetail = ({ route, navigation }) => {
           )}
         </View>
         <View>
-          <Text>Programs :</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+            Programs :
+          </Text>
           {programs && programs?.length === 0 ? (
-            <Text>No data found !</Text>
+            <Text style={{ fontWeight: "bold", color: "red" }}>
+              No data found !
+            </Text>
           ) : (
             <View>
-              <Text>Title :</Text>
-              <Text>{programs && programs.title}</Text>
-              <Text>Description :</Text>
-              <Text>{programs && programs.description}</Text>
-              <Text>Link :</Text>
-              <Text>{programs && programs.link}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>Title :</Text>
+              <Text style={{ fontSize: 18 }}>{programs && programs.title}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                Description :
+              </Text>
+              <Text style={{ fontSize: 18 }}>
+                {programs && programs.description}
+              </Text>
+              <Text style={{ fontWeight: "bold", fontSize: 23 }}>Link :</Text>
+              <Text style={{ fontSize: 18 }}>{programs && programs.link}</Text>
             </View>
           )}
         </View>
         <View>
-          <Text> Statistics :</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
+            {" "}
+            Statistics :
+          </Text>
           {stat && stat?.length === 0 ? (
-            <Text> No data found !</Text>
+            <Text style={{ fontWeight: "bold", color: "red" }}>
+              {" "}
+              No data found !
+            </Text>
           ) : (
             stat.map((item, index) => (
               <View key={index}>
-                <Text>Title :</Text>
-                <Text> {item?.statId?.title}</Text>
-                <Text>Unit :</Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Title :
+                </Text>
+                <Text style={{ fontSize: 18 }}> {item?.statId?.title}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>Unit :</Text>
+                <Text style={{ fontSize: 18 }}>
                   {" "}
                   {(item?.statId?.unit && item?.statId?.unit[0].value) ||
                     item?.statId?.unit[0]}
                 </Text>
-                <Text>Type :</Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>Type :</Text>
+                <Text style={{ fontSize: 18 }}>
                   {" "}
                   {(item?.statId?.type && item?.statId?.type[0].value) ||
                     item?.statId?.type[0]}
                 </Text>
-                <Text>Min or Max ? :</Text>
-                <Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Min or Max ? :
+                </Text>
+                <Text style={{ fontSize: 18 }}>
                   {" "}
                   {(item?.statId?.minMax && item?.statId?.minMax[0].value) ||
                     item?.statId?.minMax[0]}
                 </Text>
-                <Text>Description :</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Description :
+                </Text>
                 <Text> {item?.statId?.description}</Text>
-                <Text>Current State :</Text>
-                <Text> {item?.statId?.currentState}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+                  Current State :
+                </Text>
+                <Text style={{ fontSize: 18 }}>
+                  {" "}
+                  {item?.statId?.currentState}
+                </Text>
               </View>
             ))
           )}
