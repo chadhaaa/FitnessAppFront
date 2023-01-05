@@ -9,9 +9,8 @@ import {
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { CheckBox } from "react-native-elements";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
-import DropDownPicker from "react-native-dropdown-picker";
+import { useNavigation } from "@react-navigation/native";
 
 import { connect } from "react-redux";
 
@@ -41,6 +40,8 @@ const UpdatePlayer = ({ ...props }) => {
   const [everyStat, setEveryStat] = useState([]);
 
   const { user } = props;
+
+  const navigation = useNavigation();
 
   const chooseCom = (value) => {
     setComp(value);
@@ -72,6 +73,7 @@ const UpdatePlayer = ({ ...props }) => {
       `http://192.168.1.197:8000/api/playerUpdate/${user._id}`,
       formdata
     );
+    navigation.navigate("Home");
   };
 
   // Getting All Competences
