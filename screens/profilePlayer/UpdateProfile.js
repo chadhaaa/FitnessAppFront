@@ -68,9 +68,7 @@ const UpdateProfile = ({ ...props }) => {
   }, []);
   const getProfile = async () => {
     const response = await axios
-      .get(
-        `http://192.168.1.197:8000/api/UpdateProfilePlayer/628591301cbedd1f6918329b`
-      )
+      .get(`http://192.168.1.197:8000/api/UpdateProfilePlayer/${user._id}`)
       .then((res) => {
         setList(res.data);
       })

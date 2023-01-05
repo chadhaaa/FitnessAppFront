@@ -121,25 +121,37 @@ const App = () => {
             <Drawer.Screen name="Invite Player" component={InvitePlayer} />
             <Drawer.Screen name="View Profile" component={ViewProfile} />
             <Drawer.Screen name="Update Profile" component={UpdateProfile} />
+            <Drawer.Screen name="Sessions Lists" component={GetSeance} />
+
+            {/* coach route sessions + update  */}
+
+            <Drawer.Screen
+              name="List of Sessions (coach)"
+              component={GetAllSessions}
+            />
+            <Drawer.Screen name="Update Player" component={UpdatePlayer} />
+            <Drawer.Screen name="Challenges" component={CrudDefis} />
             <Drawer.Screen
               name="One Session Details"
               component={GetOneSeance}
+              options={{ drawerLabel: () => null }}
             />
-            <Drawer.Screen name="Sessions Lists" component={GetSeance} />
-            <Drawer.Screen name="Update Session" component={UpdateSession} />
+            <Drawer.Screen
+              name="Session Detail (coach)"
+              component={GetSessionDetail}
+              options={{ drawerLabel: () => null }}
+            />
+            <Drawer.Screen
+              name="Update Session"
+              component={UpdateSession}
+              options={{ drawerLabel: () => null }}
+            />
 
-        {/* coach route sessions + update  */}
-        <Drawer.Screen
-          name="Session Detail (coach)"
-          component={GetSessionDetail}
-        />
-        <Drawer.Screen
-          name="List of Sessions (coach)"
-          component={GetAllSessions}
-        />
-        <Drawer.Screen name="Update Player" component={UpdatePlayer} />
-            <Drawer.Screen name="Challenges" component={CrudDefis} />
-            <Drawer.Screen name="Session Program" component={CrudProgram} />
+            <Drawer.Screen
+              name="Session Program"
+              component={CrudProgram}
+              options={{ drawerLabel: () => null }}
+            />
           </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>

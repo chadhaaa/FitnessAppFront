@@ -61,7 +61,7 @@ const UpdatePlayer = ({ ...props }) => {
       weight: weight,
       country: country,
       scholar: scholar,
-      email: email,
+      // email: email,
       password: password,
       stats: stats,
       comp: comp,
@@ -121,7 +121,7 @@ const UpdatePlayer = ({ ...props }) => {
           setWeight(res.data.player.weight);
           setCountry(res.data.player.country);
           setScholar(res.data.player.scholar);
-          setEmail(res.data.player.email);
+          // setEmail(res.data.player.email);
           setPassword(res.data.player.password);
           setActive(res.data.player.active);
           setComp(res.data.comp);
@@ -154,11 +154,11 @@ const UpdatePlayer = ({ ...props }) => {
           placeholder="Lastname"
           onChangeText={(lastname) => setLastname(lastname)}
         />
-        <TextInput
+        {/* <TextInput
           value={email}
           placeholder="Email"
           onChangeText={(email) => setEmail(email)}
-        />
+        /> */}
         <TextInput
           value={tel}
           placeholder="Telephone Number"

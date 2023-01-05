@@ -111,7 +111,7 @@ const UpdateSession = ({ route, navigation }) => {
   useEffect(() => {
     if (loading) {
       axios
-        .get("http://192.168.1.197:8000/api/sessionDetails/" + sessionUpdate)
+        .get("http://192.168.1.197:8000/api/findSessionOne/" + sessionUpdate)
         .then((res) => {
           console.log({ response: { ...res } });
           setDay(res.data.player.day);
