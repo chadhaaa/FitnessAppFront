@@ -14,6 +14,8 @@ const GetSeance = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [data, setData] = useState(sessions);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
     getSessions();
@@ -27,24 +29,33 @@ const GetSeance = ({ navigation }) => {
   };
 
   const onDateNowChange = (value) => {
-    const dataChange = sessions.filter((session) => session.day === value);
-    setSession(dataChange);
+    setSelectedDate(value);
+    const filteredList = sessions.filter((session) =>
+      moment(session.day).isSame(value, "day")
+    );
+    setFilteredList(filteredList);
   };
 
   return (
     <ScrollView>
       <View>
         <View>
-          {/* <CalendarPicker
-            onDateChange={onDateNowChange}
-            // allowRangeSelection={true}
-          /> */}
           <DatePicker mode="datepicker" onDateChange={onDateNowChange} />
-          {/* <Button title="Filter" onPress={onDateNowChange} /> */}
+
+          {filteredList.map((item) => {
+            return (
+              <View key={item._id}>
+                <Seance
+                  id={item._id}
+                  key={item._id}
+                  day={moment(item.day).format("YYYY/MM/DD").toString()}
+                  feedback={item.feedback}
+                  hour={item.hour}
+                />
+              </View>
+            );
+          })}
         </View>
-        {/* <View>
-          <Calendar singleSelectMode onChange={onDateNowChange} />
-        </View> */}
         <Text style={{ fontWeight: "bold", fontSize: 30, color: "green" }}>
           Sessions List :{" "}
         </Text>
