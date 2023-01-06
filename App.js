@@ -113,7 +113,10 @@ const App = () => {
             <Drawer.Screen
               name="Register"
               component={Register}
-              options={{ headerShown: false, drawerLabel: () => null }}
+              options={{
+                headerShown: false,
+                drawerItemStyle: { display: "none" },
+              }}
             />
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Statistics" component={CrudStatistics} />
@@ -130,27 +133,35 @@ const App = () => {
               component={GetAllSessions}
             />
             <Drawer.Screen name="Update Player" component={UpdatePlayer} />
-            <Drawer.Screen name="Challenges" component={CrudDefis} />
+            <Drawer.Screen
+              name="Challenges"
+              component={CrudDefis}
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
             <Drawer.Screen
               name="One Session Details"
               component={GetOneSeance}
-              options={{ drawerLabel: () => null }}
+              options={{ drawerItemStyle: { display: "none" } }}
+              // options={{ drawerLabel: () => null }}
             />
             <Drawer.Screen
               name="Session Detail (coach)"
               component={GetSessionDetail}
-              options={{ drawerLabel: () => null }}
+              options={{ drawerItemStyle: { display: "none" } }}
+              // options={{ drawerLabel: () => null }}
             />
             <Drawer.Screen
               name="Update Session"
               component={UpdateSession}
-              options={{ drawerLabel: () => null }}
+              options={{ drawerItemStyle: { display: "none" } }}
+              // options={{ drawerLabel: () => null }}
             />
 
             <Drawer.Screen
               name="Session Program"
               component={CrudProgram}
-              options={{ drawerLabel: () => null }}
+              options={{ drawerItemStyle: { display: "none" } }}
+              // options={{ drawerLabel: () => null }}
             />
           </Drawer.Navigator>
         </NavigationContainer>

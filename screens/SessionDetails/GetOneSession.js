@@ -109,19 +109,19 @@ const GetOneSeance = ({ route, navigation }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>
                   Title :
                 </Text>
-                <Text style={{ fontSize: 18 }}>{item.compId.name}</Text>
+                <Text style={{ fontSize: 18 }}>{item.compId?.name}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>
                   Description :
                 </Text>
-                <Text style={{ fontSize: 18 }}>{item.compId.description}</Text>
+                <Text style={{ fontSize: 18 }}>{item.compId?.description}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>Link :</Text>
-                <Text style={{ fontSize: 18 }}>{item.compId.link}</Text>
+                <Text style={{ fontSize: 18 }}>{item.compId?.link}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>
                   {" "}
                   Star Rating :
                 </Text>
                 <Rating
-                  startingValue={item.compId.stars}
+                  startingValue={item.compId?.stars}
                   type="custom"
                   ratingColor="yellow"
                   ratingBackgroundColor="grey"
@@ -176,13 +176,13 @@ const GetOneSeance = ({ route, navigation }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>Unit :</Text>
                 <Text style={{ fontSize: 18 }}>
                   {" "}
-                  {(item?.statId?.unit && item?.statId?.unit[0].value) ||
+                  {(item?.statId?.unit && item?.statId?.unit[0]?.value) ||
                     item?.statId?.unit[0]}
                 </Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>Type :</Text>
                 <Text style={{ fontSize: 18 }}>
                   {" "}
-                  {(item?.statId?.type && item?.statId?.type[0].value) ||
+                  {(item?.statId?.type && item?.statId?.type[0]?.value) ||
                     item?.statId?.type[0]}
                 </Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>
@@ -190,7 +190,7 @@ const GetOneSeance = ({ route, navigation }) => {
                 </Text>
                 <Text style={{ fontSize: 18 }}>
                   {" "}
-                  {(item?.statId?.minMax && item?.statId?.minMax[0].value) ||
+                  {(item?.statId?.minMax && item?.statId?.minMax[0]?.value) ||
                     item?.statId?.minMax[0]}
                 </Text>
                 <Text style={{ fontWeight: "bold", fontSize: 23 }}>

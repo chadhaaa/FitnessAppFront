@@ -111,7 +111,7 @@ const UpdatePlayer = ({ ...props }) => {
   useEffect(() => {
     if (loading) {
       axios
-        .get(`http://localhost:8000/api/viewProfile/${user._id}`)
+        .get(`http://192.168.1.197:8000/api/viewProfile/${user._id}`)
         .then((res) => {
           console.log({ response: { ...res } });
           setSessionPrice(res.data.player.sessionPrice);
