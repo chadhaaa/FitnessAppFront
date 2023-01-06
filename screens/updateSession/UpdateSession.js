@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 
 const UpdateSession = ({ route, navigation }) => {
   const { sessionUpdate } = route.params;
